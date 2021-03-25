@@ -1,0 +1,25 @@
+<mat-toolbar>
+  <mat-toolbar-row class="page-title-container" id="PageHead">
+    <span class="page-title">D E L A Y G R A M</span>
+  </mat-toolbar-row>
+  <mat-toolbar-row id="navbar" class="navbar-container" [ngClass]="{'mat-elevation-z1' : true}">
+    <div class="navbar-flex">
+      <button mat-raised-button class="navbar-button" routerLink="/home" routerLinkActive="active">
+        Home
+      </button>
+      <button mat-raised-button class="navbar-button" routerLink="/overview" routerLinkActive="active">
+        Profile
+      </button>
+      <button mat-raised-button class="navbar-button" routerLink="/community" routerLinkActive="active">
+        Community
+      </button>
+      <button mat-raised-button class="navbar-button" routerLink="/login" routerLinkActive="active" (click)="doLogin()">
+        Login
+      </button>
+      <button mat-raised-button class="navbar-button" routerLink="/home" routerLinkActive="active" (click)="doLogout()">
+        Logout
+      </button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
