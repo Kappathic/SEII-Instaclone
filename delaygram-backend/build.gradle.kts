@@ -6,6 +6,13 @@ plugins {
 	kotlin("jvm") version "1.4.31"
 	kotlin("plugin.spring") version "1.4.31"
 	kotlin("plugin.jpa") version "1.4.31"
+	kotlin("plugin.allopen") version "1.3.61"
+}
+
+allOpen {
+	annotation("javax.persistence.Entity")
+	annotation("javax.persistence.Embeddable")
+	annotation("javax.persistence.MappedSuperclass")
 }
 
 group = "de.cschilling"
@@ -26,6 +33,7 @@ dependencies {
 	runtimeOnly("com.h2database:h2")
 	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation("org.springframework.security.oauth:spring-security-oauth2:2.4.1.RELEASE")
 }
 
 tasks.withType<KotlinCompile> {
