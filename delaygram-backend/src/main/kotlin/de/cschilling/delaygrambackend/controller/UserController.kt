@@ -24,29 +24,13 @@ class UserController(
     val logger: Logger
 ) {
 
-
-    @PreAuthorize("permitAll()")
-    @GetMapping("/authorities")
-    fun getAuthorities(): String? {
-        try {
-            val roles =  SecurityContextHolder.getContext().authentication.authorities.joinToString { it -> it.authority }
-            return "{ \"roles\": \"$roles\" }"
-        } catch (e: Error) {
-            logger.error(e.toString())
-            throw ResponseStatusException(
-                HttpStatus.BAD_REQUEST,
-                e.localizedMessage
-            )
-        }
-
-    }
-
     @PreAuthorize("permitAll()")
     @PostMapping("/login")
     fun login(@RequestBody credentials: Map<String, String>, response: HttpServletResponse): User {
         val authenticationToken = UsernamePasswordAuthenticationToken(credentials["username"], credentials["password"])
         SecurityContextHolder.getContext().authentication = authenticationProvider.authenticate(authenticationToken)
         val user = userService.getCurrentUser()
+        logger.info(user.toString())
         response.setHeader("Set-Cookie","Bearer ${jwtUserDetailsService.createToken(user)}; Secure; HttpOnly; SameSite=Strict;Max-Age=600;Path=/ ")
         return user
     }
@@ -63,11 +47,27 @@ class UserController(
     ) = userService.updateProfilePic(profilePic)
 
 
-
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/logout")
     fun logout(response: HttpServletResponse, request: HttpServletRequest): String {
         val jwtToken = request.getHeader("cookie").substringAfter("Bearer ")
         response.setHeader("Set-Cookie","Bearer ${jwtToken}; Secure; HttpOnly; SameSite=Strict;Max-Age=-1;Path=/")
         return "{\"logout\": \"true\"}"
     }
 
+    @PreAuthorize("permitAll()")
+    @GetMapping("/authorities")
+    fun getAuthorities(): String? {
+        try {
+            val roles =  SecurityContextHolder.getContext().authentication.authorities.joinToString { it -> it.authority }
+            return "{ \"roles\": \"$roles\" }"
+        } catch (e: Error) {
+            logger.error(e.toString())
+            throw ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                e.localizedMessage
+            )
+        }
+
+    }
 }

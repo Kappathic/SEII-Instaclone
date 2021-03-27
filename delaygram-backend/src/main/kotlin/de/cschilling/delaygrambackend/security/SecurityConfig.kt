@@ -3,7 +3,6 @@ package de.cschilling.delaygrambackend.security
 import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
-import de.cschilling.delaygrambackend.security.SecurityProperties
 import de.cschilling.delaygrambackend.service.JwtUserDetailsService
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -37,9 +36,9 @@ class SecurityConfig(
     }
 
     @Bean
-    fun authenticationProvider(userService: JwtUserDetailsService?, passwordEncoder: PasswordEncoder?): AuthenticationProvider? {
+    fun authenticationProvider(jwtUserDetailsService: JwtUserDetailsService?, passwordEncoder: PasswordEncoder?): AuthenticationProvider? {
         val provider = DaoAuthenticationProvider()
-        provider.setUserDetailsService(userService)
+        provider.setUserDetailsService(jwtUserDetailsService)
         provider.setPasswordEncoder(passwordEncoder)
         return provider
     }

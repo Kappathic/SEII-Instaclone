@@ -13,6 +13,7 @@ class User(
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     var password: String,
     var role: String?,
+    @Column(unique = true)
     var email: String?,
     @Lob
     var profilePic: ByteArray?
