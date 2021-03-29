@@ -1,1 +1,55 @@
-<p>registration works!</p>
+<div class="page-container">
+  <div class="register-container">
+
+    <mat-form-field appearance="fill" class="form-container">
+      <mat-label>Username</mat-label>
+      <label>
+        <input matInput placeholder="Username" [(ngModel)]="username">
+      </label>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-container">
+      <mat-label>Vorname</mat-label>
+      <label>
+        <input matInput placeholder="Dein Vorname" [(ngModel)]="prename">
+      </label>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-container">
+      <mat-label>Nachname</mat-label>
+      <label>
+        <input matInput type="text" placeholder="Dein Nachname" [(ngModel)]="name">
+      </label>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-container">
+      <mat-label>E-Mail</mat-label>
+      <label>
+        <input matInput type="text" placeholder="Deine Mailadresse" [(ngModel)]="mail">
+      </label>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-container">
+      <mat-label>Passwort</mat-label>
+      <label>
+        <input matInput [type]="hide1 ? 'password' : 'text'" [(ngModel)]="password">
+      </label>
+      <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide1">
+        <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="form-container">
+      <mat-label>Passwort wiederholen</mat-label>
+      <label>
+        <input matInput [type]="hide2 ? 'password' : 'text'" [(ngModel)]="confirmPassword">
+      </label>
+      <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+        <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button mat-raised-button class="register-button" (click)="registerUser()">Register</button>
+  </div>
+</div>
+
