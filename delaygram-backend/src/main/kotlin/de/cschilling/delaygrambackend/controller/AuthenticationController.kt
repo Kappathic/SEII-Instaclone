@@ -4,13 +4,11 @@ import de.cschilling.delaygrambackend.model.User
 import de.cschilling.delaygrambackend.service.JwtUserDetailsService
 import de.cschilling.delaygrambackend.service.UserService
 import org.slf4j.Logger
-import org.springframework.http.HttpStatus
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.server.ResponseStatusException
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
@@ -30,25 +28,29 @@ class AuthenticationController(
         SecurityContextHolder.getContext().authentication = authenticationProvider.authenticate(authenticationToken)
         val user = userService.getCurrentUser()
         logger.info(user.toString())
-        response.setHeader("Set-Cookie","Bearer ${jwtUserDetailsService.createToken(user)}; Secure; HttpOnly; SameSite=Strict;Max-Age=600;Path=/ ")
+        response.setHeader(
+            "Set-Cookie",
+            "Bearer ${jwtUserDetailsService.createToken(user)}; Secure; HttpOnly; SameSite=Strict;Max-Age=600;Path=/ "
+        )
         return user
     }
 
     @PreAuthorize("permitAll()")
     @PostMapping("/register")
-    fun register(@RequestBody user: User) = userService.createUser(user);
+    fun register(@RequestBody user: User) = userService.createUser(user)
+
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/logout")
     fun logout(response: HttpServletResponse, request: HttpServletRequest): String {
         val jwtToken = request.getHeader("cookie").substringAfter("Bearer ")
-        response.setHeader("Set-Cookie","Bearer ${jwtToken}; Secure; HttpOnly; SameSite=Strict;Max-Age=-1;Path=/")
+        response.setHeader("Set-Cookie", "Bearer ${jwtToken}; Secure; HttpOnly; SameSite=Strict;Max-Age=-1;Path=/")
         return "{\"logout\": \"true\"}"
     }
 
     @PreAuthorize("permitAll()")
     @GetMapping("/authorities")
     fun getAuthorities(): String {
-        val roles =  SecurityContextHolder.getContext().authentication.authorities.joinToString { it -> it.authority }
+        val roles = SecurityContextHolder.getContext().authentication.authorities.joinToString { it -> it.authority }
         return "{ \"roles\": \"$roles\" }"
     }
 }

@@ -12,15 +12,22 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.*
 
 @ControllerAdvice
-class RestResponseEntityExceptionHandler(val logger: Logger): ResponseEntityExceptionHandler() {
+class RestResponseEntityExceptionHandler(val logger: Logger) : ResponseEntityExceptionHandler() {
     @ExceptionHandler(NoSuchElementException::class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    fun handleNoSuchElementException(ex: RuntimeException, handlerMethod: HandlerMethod): ResponseEntity<ErrorResponse> {
+    fun handleNoSuchElementException(
+        ex: RuntimeException,
+        handlerMethod: HandlerMethod
+    ): ResponseEntity<ErrorResponse> {
         LoggerFactory.getLogger(handlerMethod.method.declaringClass).error(ex.localizedMessage)
         return ResponseEntity(ErrorResponse(HttpStatus.NOT_FOUND, ex.localizedMessage), HttpStatus.NOT_FOUND)
     }
+
     @ExceptionHandler(IllegalArgumentException::class)
-    fun handleIllegalArgumentException(ex: RuntimeException, handlerMethod: HandlerMethod): ResponseEntity<ErrorResponse> {
+    fun handleIllegalArgumentException(
+        ex: RuntimeException,
+        handlerMethod: HandlerMethod
+    ): ResponseEntity<ErrorResponse> {
         LoggerFactory.getLogger(handlerMethod.method.declaringClass).error(ex.localizedMessage)
         return ResponseEntity(ErrorResponse(HttpStatus.BAD_REQUEST, ex.localizedMessage), HttpStatus.BAD_REQUEST)
     }

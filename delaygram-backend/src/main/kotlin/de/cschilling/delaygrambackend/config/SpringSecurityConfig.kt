@@ -30,6 +30,7 @@ class SpringSecurityConfig(
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .addFilterBefore(jwtFilter, RequestHeaderAuthenticationFilter::class.java)
     }
+
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource? {
         val configuration = CorsConfiguration()

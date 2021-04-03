@@ -2,7 +2,6 @@ package de.cschilling.delaygrambackend.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.databind.annotation.JsonSerialize
 import javax.persistence.*
 
 @Entity
@@ -22,7 +21,7 @@ class User(
     @JoinTable(
         name = "follow",
         joinColumns = [JoinColumn(name = "follower", referencedColumnName = "id", nullable = false)],
-        inverseJoinColumns = [JoinColumn(name = "follows",referencedColumnName = "id", nullable = false)]
+        inverseJoinColumns = [JoinColumn(name = "follows", referencedColumnName = "id", nullable = false)]
     )
     @ManyToMany
     @JsonIgnore
