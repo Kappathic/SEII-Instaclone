@@ -18,27 +18,27 @@ import javax.servlet.http.HttpServletResponse
 @RestController
 @RequestMapping("api/user")
 class UserController(
-    val userService: UserService,
-    val authenticationProvider: AuthenticationProvider,
-    val jwtUserDetailsService: JwtUserDetailsService,
-    val logger: Logger
-) {
+    val userService: UserService
+){
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("")
+    fun getAllUsers() = userService.getAllUsers()
 
-    @PreAuthorize("permitAll()")
-    @PostMapping("/login")
-    fun login(@RequestBody credentials: Map<String, String>, response: HttpServletResponse): User {
-        val authenticationToken = UsernamePasswordAuthenticationToken(credentials["username"], credentials["password"])
-        SecurityContextHolder.getContext().authentication = authenticationProvider.authenticate(authenticationToken)
-        val user = userService.getCurrentUser()
-        logger.info(user.toString())
-        response.setHeader("Set-Cookie","Bearer ${jwtUserDetailsService.createToken(user)}; Secure; HttpOnly; SameSite=Strict;Max-Age=600;Path=/ ")
-        return user
-    }
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/{id}")
+    fun getUserById(@PathVariable id: Long) = userService.getById(id)
 
-    @PreAuthorize("permitAll()")
-    @PostMapping("/register")
-    fun register(@RequestBody user: User) = userService.createUser(user);
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("")
+    fun createUser() = userService.getAllUsers()
 
+    @PreAuthorize("isAuthenticated()")
+    @PutMapping("")
+    fun updateUser(@RequestBody user: User) = userService.update(user)
+
+    @PreAuthorize("isAuthenticated()")
+    @DeleteMapping("/{id}")
+    fun deleteUserById(@PathVariable id: Long) = userService.deleteById(id)
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/updateProfilePic")
@@ -46,28 +46,15 @@ class UserController(
         @RequestParam("picture") profilePic : MultipartFile,
     ) = userService.updateProfilePic(profilePic)
 
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/follow/{id}")
+    fun followUser(
+        @PathVariable id: Long
+    ) = userService.followUser(id);
 
     @PreAuthorize("isAuthenticated()")
-    @PostMapping("/logout")
-    fun logout(response: HttpServletResponse, request: HttpServletRequest): String {
-        val jwtToken = request.getHeader("cookie").substringAfter("Bearer ")
-        response.setHeader("Set-Cookie","Bearer ${jwtToken}; Secure; HttpOnly; SameSite=Strict;Max-Age=-1;Path=/")
-        return "{\"logout\": \"true\"}"
-    }
-
-    @PreAuthorize("permitAll()")
-    @GetMapping("/authorities")
-    fun getAuthorities(): String? {
-        try {
-            val roles =  SecurityContextHolder.getContext().authentication.authorities.joinToString { it -> it.authority }
-            return "{ \"roles\": \"$roles\" }"
-        } catch (e: Error) {
-            logger.error(e.toString())
-            throw ResponseStatusException(
-                HttpStatus.BAD_REQUEST,
-                e.localizedMessage
-            )
-        }
-
-    }
+    @GetMapping("/follower/{id}")
+    fun getFollower(
+        @PathVariable id: Long
+    ) = userService.getFollower(id)
 }
