@@ -10,7 +10,7 @@ import {HttpClient} from "@angular/common/http";
 export class RegistrationComponent implements OnInit {
   hide1 = true;
   hide2 = true;
-  profilePicture: any;
+  picture: any;
   username: any;
   prename: any;
   name: any;

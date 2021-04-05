@@ -26,6 +26,7 @@ import { SnackBarService } from './snack-bar-service.service';
 import { LegalDisclosureComponent } from './legal-disclosure/legal-disclosure.component';
 import { PrivacyNoticeComponent } from './privacy-notice/privacy-notice.component';
 import {FormsModule} from "@angular/forms";
+import {MatFileUploadModule} from "angular-material-fileupload";
 
 @NgModule({
   declarations: [
@@ -39,20 +40,21 @@ import {FormsModule} from "@angular/forms";
     LegalDisclosureComponent,
     PrivacyNoticeComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatRippleModule,
-    MatButtonModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSnackBarModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatIconModule,
-    HttpClientModule,
-    MatInputModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatRippleModule,
+        MatButtonModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatSnackBarModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatIconModule,
+        HttpClientModule,
+        MatInputModule,
+        MatFileUploadModule
+    ],
   providers: [
     CookieService,
     SnackBarService
