@@ -18,12 +18,14 @@ repositories {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("com.auth0:java-jwt:3.13.0")
+    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("com.auth0:java-jwt:3.13.0")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springdoc:springdoc-openapi-data-rest:1.5.6")
+    implementation("org.springdoc:springdoc-openapi-ui:1.5.6")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("org.postgresql:postgresql")
