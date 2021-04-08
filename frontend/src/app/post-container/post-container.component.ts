@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SnackBarService} from '../snack-bar-service.service';
 
 @Component({
   selector: 'app-post-container',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-container.component.scss']
 })
 export class PostContainerComponent implements OnInit {
-
-  constructor() { }
-
+  public isActive = true;
+  constructor(
+    private snackBar: SnackBarService
+  ) {}
   ngOnInit(): void {
   }
-
+  test(): void{
+    this.snackBar.open('SnackBar Works!', 'close');
+  }
 }

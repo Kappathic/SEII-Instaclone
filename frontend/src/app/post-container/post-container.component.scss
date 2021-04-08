@@ -1,37 +1,59 @@
-$post-width: 800px;
-
+$post-width: 1000px;
 #post-container{
+  margin-top: $post-width/10;
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
 }
 #post-header{
-  display: grid;
-  grid-template-columns: $post-width/12 1fr;
-  grid-column-gap: $post-width/20;
   width: $post-width;
   height: $post-width/10;
 }
+#post-header-toolbar{
+  display: grid;
+  height: 100%;
+  grid-template-columns: $post-width/10 1fr;
+  grid-column-gap: $post-width/20;
+}
+#post-profile-picture-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $post-width/13+5;
+  height: $post-width/13+5;
+  background-color: #F2F2F2;
+  border-radius: 25%;
+  cursor: pointer;
+}
 #post-profile-picture{
-  align-self: center;
-  width: $post-width/12;
-  height: $post-width/12;
-  background-color: #2c2c2c;
-  border-radius: 50%;
+  width: $post-width/13;
+  height: $post-width/13;
+  border-radius: 25%;
 }
 #post-username{
-  color: #2c2c2c;
+  color: #F2F2F2;
   font-size: 24px;
   font-weight: 400;
   margin: 0px;
   align-self: center;
   text-decoration: none;
+  cursor: pointer;
 }
 #post-content{
   width: $post-width;
   height: $post-width;
-  background-color: #0BE9E9;
+  background-color: #2a67ff;
 }
 #post-footer{
   width: $post-width;
+  .mat-icon{
+    width: $post-width/20;
+    height: $post-width/20;
+    font-size: $post-width/20;
+    cursor: pointer;
+  }
+}
+#post-footer-toolbar{
+  display: grid;
+  grid-template-columns: 7% 7% 7% 1fr;
 }
