@@ -1,0 +1,10 @@
+
+spring:
+  data:
+    rest:
+      default-media-type: application/json
+      base-path: /api
+
+logging:
+  level:
+    org.springframework.web: INFO

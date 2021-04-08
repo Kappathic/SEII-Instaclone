@@ -7,30 +7,10 @@ import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("api/users")
 class UserController(
     val userService: UserService
 ) {
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("")
-    fun getAllUsers() = userService.getAllUsers()
-
-    @PreAuthorize("isAuthenticated()")
-    @GetMapping("/{id}")
-    fun getUserById(@PathVariable id: Long) = userService.getById(id)
-
-    @PreAuthorize("isAuthenticated()")
-    @PostMapping("")
-    fun createUser() = userService.getAllUsers()
-
-    @PreAuthorize("isAuthenticated()")
-    @PutMapping("")
-    fun updateUser(@RequestBody user: User) = userService.update(user)
-
-    @PreAuthorize("isAuthenticated()")
-    @DeleteMapping("/{id}")
-    fun deleteUserById(@PathVariable id: Long) = userService.deleteById(id)
-
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/updateProfilePic")
     fun updateProfilePic(
