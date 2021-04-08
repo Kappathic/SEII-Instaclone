@@ -7,6 +7,7 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {LegalDisclosureComponent} from './legal-disclosure/legal-disclosure.component';
 import {PrivacyNoticeComponent} from './privacy-notice/privacy-notice.component';
 import {AuthGuardService} from './auth-guard.service';
+import {AddPostComponent} from "./add-post/add-post.component";
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
     path: 'privacy-notice',
     component: PrivacyNoticeComponent,
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'add-post',
+    component: AddPostComponent
   },
   {
     path: '',

@@ -1,0 +1,11 @@
+<div class="page-container">
+  <div class="post-container">
+    <mat-form-field appearance="fill" class="form-container">
+      <mat-label>description</mat-label>
+      <label>
+        <input matInput placeholder="Bildbeschreibung" [(ngModel)]="description">
+      </label>
+    </mat-form-field>
+    <input id="singleFile" type="file" accept="image/*" [(ngModel)]="picture" class="form-container"/>
+  </div>
+</div>
