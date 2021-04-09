@@ -6,9 +6,6 @@ import javax.persistence.*
 
 @Entity
 class User(
-    @Id
-    @GeneratedValue
-    val id: Long,
     @Column(unique = true)
     var username: String,
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -18,6 +15,8 @@ class User(
     var email: String?,
     @Lob
     var profilePic: ByteArray?,
+    @OneToMany
+    var posts: MutableList<Post> = mutableListOf(),
     @JoinTable(
         name = "follow",
         joinColumns = [JoinColumn(name = "follower", referencedColumnName = "id", nullable = false)],
@@ -28,7 +27,7 @@ class User(
     var follower: MutableSet<User> = mutableSetOf(),
     @ManyToMany(mappedBy = "follower")
     var follows: MutableSet<User> = mutableSetOf()
-) {
+):BaseEntity() {
     override fun toString(): String {
         return "User(id=$id, username='$username', password='$password', role=$role, email=$email, profilePic=${profilePic?.contentToString()}, follower=$follower)"
     }
