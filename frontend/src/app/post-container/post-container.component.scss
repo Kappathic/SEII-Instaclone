@@ -4,6 +4,10 @@ $post-width: 1000px;
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
 }
 #post-header{
   width: $post-width;
@@ -14,6 +18,9 @@ $post-width: 1000px;
   height: 100%;
   grid-template-columns: $post-width/10 1fr;
   grid-column-gap: $post-width/20;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  padding-left: 0.75rem;
 }
 #post-profile-picture-container{
   display: flex;
@@ -56,4 +63,7 @@ $post-width: 1000px;
 #post-footer-toolbar{
   display: grid;
   grid-template-columns: 7% 7% 7% 1fr;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  padding-left: 0.75rem;
 }
