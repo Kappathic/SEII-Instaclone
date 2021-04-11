@@ -2,20 +2,15 @@ package de.cschilling.delaygrambackend.service
 
 import de.cschilling.delaygrambackend.model.User
 import de.cschilling.delaygrambackend.repository.UserRepository
-import org.slf4j.Logger
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.core.context.SecurityContextHolder
-import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.web.multipart.MultipartFile
 
 @Service
 class UserService(
-    val userRepository: UserRepository,
-    val passwordEncoder: PasswordEncoder,
-    val logger: Logger
-) {
-
+    val userRepository: UserRepository
+    ){
     fun createUser(user: User) = userRepository.save(user)
 
     fun update(user: User) = userRepository.findByIdOrNull(user.id)
@@ -34,7 +29,7 @@ class UserService(
     fun getCurrentUser(): User {
         SecurityContextHolder.getContext().authentication.name
             .let { userRepository.findByUsername(it) }
-            ?.let { return it } ?: throw Exception("User Not Found")
+            .let { return it }
     }
 
     fun updateProfilePic(profilePic: MultipartFile): User {
@@ -61,6 +56,8 @@ class UserService(
         userRepository.save(userToFollow)
         return user
     }
+
+    fun getUserByUsername(username: String) = userRepository.findByUsername(username)
 
 }
 

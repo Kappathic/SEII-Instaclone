@@ -1,6 +1,7 @@
 package de.cschilling.delaygrambackend.controller
 
 import de.cschilling.delaygrambackend.model.User
+import de.cschilling.delaygrambackend.repository.UserRepository
 import de.cschilling.delaygrambackend.service.UserService
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
@@ -9,8 +10,8 @@ import org.springframework.web.multipart.MultipartFile
 @RestController
 @RequestMapping("api/user")
 class UserController(
-    val userService: UserService
-) {
+    private val userService: UserService
+){
     @PreAuthorize("isAuthenticated()")
     @GetMapping("")
     fun getAllUsers() = userService.getAllUsers()
@@ -21,7 +22,7 @@ class UserController(
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("")
-    fun createUser() = userService.getAllUsers()
+    fun createUser(@RequestBody user: User) = userService.createUser(user)
 
     @PreAuthorize("isAuthenticated()")
     @PutMapping("")
@@ -39,13 +40,13 @@ class UserController(
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/follow/{id}")
-    fun followUser(
-        @PathVariable id: Long
-    ) = userService.followUser(id)
+    fun followUser(@PathVariable id: Long) = userService.followUser(id)
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/follower/{id}")
-    fun getFollower(
-        @PathVariable id: Long
-    ) = userService.getFollower(id)
+    fun getFollower(@PathVariable id: Long) = userService.getFollower(id)
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/profile/{username}")
+    fun getProfile(@PathVariable username: String) = userService.getUserByUsername(username)
 }

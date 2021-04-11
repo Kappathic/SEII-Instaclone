@@ -26,7 +26,7 @@ class JwtUserDetailsService(
     override fun loadUserByUsername(username: String): JwtUserDetails {
         return userRepository
             .findByUsername(username)
-            ?.let { getUserDetails(it, createToken(it)) }
+            .let { getUserDetails(it, createToken(it)) }
             ?: throw Exception("Username or password didn't match")
     }
 

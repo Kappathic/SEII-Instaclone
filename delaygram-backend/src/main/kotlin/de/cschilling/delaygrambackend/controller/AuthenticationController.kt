@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("api/auth")
 class AuthenticationController(
     private val userService: UserService,
     private val authenticationProvider: AuthenticationProvider,
