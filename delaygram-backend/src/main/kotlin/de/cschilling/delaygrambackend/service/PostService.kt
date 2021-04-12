@@ -14,7 +14,9 @@ class PostService(
 ) {
     fun createPost(post: Post): Post {
         val savedPost = postRepository.save(post)
-        userService.getCurrentUser().posts.add(savedPost)
+        val user = userService.getCurrentUser()
+        user.posts.add(savedPost)
+        userService.update(user)
         return savedPost
     }
         fun update(post: Post) = postRepository.findByIdOrNull(post.id)
