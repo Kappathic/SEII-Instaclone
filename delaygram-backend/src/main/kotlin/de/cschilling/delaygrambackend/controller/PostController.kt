@@ -31,4 +31,8 @@ class PostController(
     @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/{id}")
     fun deletePostById(@PathVariable id: Long) = postService.deleteById(id)
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/feed")
+    fun getFeedPosts() = postService.getFeedPosts()
 }

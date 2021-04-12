@@ -14,7 +14,9 @@ class PostService(
 ) {
     fun createPost(post: Post): Post {
         val savedPost = postRepository.save(post)
-        userService.getCurrentUser().posts.add(savedPost)
+        val user = userService.getCurrentUser()
+        user.posts.add(savedPost)
+        userService.update(user)
         return savedPost
     }
         fun update(post: Post) = postRepository.findByIdOrNull(post.id)
@@ -29,4 +31,11 @@ class PostService(
         fun deleteById(id: Long) = postRepository.findByIdOrNull(id)
             ?.let { postRepository.deleteById(id) }
             ?: throw NoSuchElementException("No Post found with matching id")
+
+    fun getFeedPosts(): MutableList<Post> {
+        val posts = mutableListOf<Post>()
+        val user = userService.getCurrentUser()
+        posts.addAll(user.follows.flatMap {followUser -> followUser.posts })
+        return posts
+    }
 }
