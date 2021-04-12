@@ -25,9 +25,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { SnackBarService } from './snack-bar-service.service';
 import { LegalDisclosureComponent } from './legal-disclosure/legal-disclosure.component';
 import { PrivacyNoticeComponent } from './privacy-notice/privacy-notice.component';
-
+import { AddPostComponent } from './add-post/add-post.component';
 import {FormsModule} from "@angular/forms";
-import {MatFileUploadModule} from "angular-material-fileupload";
 import { PostContainerComponent } from './post-container/post-container.component';
 
 
@@ -42,25 +41,22 @@ import { PostContainerComponent } from './post-container/post-container.componen
     FooterComponent,
     LegalDisclosureComponent,
     PrivacyNoticeComponent,
-    PostContainerComponent
+    PostContainerComponent,
+    AddPostComponent
   ],
-
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        MatRippleModule,
-        MatButtonModule,
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatSnackBarModule,
-        MatFormFieldModule,
-        FormsModule,
-        MatIconModule,
-        HttpClientModule,
-        MatInputModule,
-        MatFileUploadModule
-    ],
-
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    MatRippleModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSnackBarModule,
+    FormsModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule
+  ],
   providers: [
     CookieService,
     SnackBarService
