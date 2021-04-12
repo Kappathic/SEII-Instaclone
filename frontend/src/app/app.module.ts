@@ -50,7 +50,9 @@ import {FormsModule} from "@angular/forms";
     MatToolbarModule,
     MatSnackBarModule,
     FormsModule,
-    MatFormFieldModule
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     CookieService,

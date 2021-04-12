@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CookieService} from 'ngx-cookie-service';
 import {HttpClient} from '@angular/common/http';
 import {SnackBarService} from '../snack-bar-service.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -9,13 +10,14 @@ import {SnackBarService} from '../snack-bar-service.service';
   templateUrl: './add-post.component.html',
   styleUrls: ['./add-post.component.scss']
 })
-export class AddPostComponent implements OnInit{
+export class AddPostComponent implements OnInit {
 
   picture: any;
   description: any;
   constructor(
-    private cookieService: CookieService,
+    private router: Router,
     private http: HttpClient,
+    private cookieService: CookieService,
     private snackBar: SnackBarService
   ){}
 
@@ -69,5 +71,4 @@ export class AddPostComponent implements OnInit{
 
   ngOnInit(): void {
   }
-
 }

@@ -1,15 +1,14 @@
-<div class="page-container">
-  <div class="post-container">
+<div class="post-container">
 <!--  <div *ngIf="checkLogin()" class="post-container"> delete the comment string as soon as login is implemented-->
-      <input *ngIf="!picture" id="singleFile" type="file" accept="image/*"  (change)="onPictureChange($event)" class="form-container"/>
-    <img *ngIf="picture" [src]="picture" class="post-container">
+  <img *ngIf="picture" [src]="picture" class="post-container">
+  <input type="file" accept="image/*"  (change)="onPictureChange($event)" id="styledUpload" hidden/>
+  <label *ngIf="!picture" for="styledUpload" class="styledUploadButton">Datei auswählen</label>
     <mat-form-field appearance="fill" class="form-container">
-      <mat-label>description</mat-label>
+      <mat-label>Bildbeschreibung</mat-label>
       <label>
         <input matInput placeholder="Bildbeschreibung" [(ngModel)]="description">
       </label>
     </mat-form-field>
-<!--    <button *ngIf="picture" mat-raised-button class="register-button" (click)="addPost()">Post</button>-->
-    <button *ngIf="picture" mat-raised-button class="register-button" >Post</button>
-  </div>
+    <button *ngIf="picture" mat-raised-button  (click)="addPost()">Post</button>
+<!--    <div>-->
 </div>
