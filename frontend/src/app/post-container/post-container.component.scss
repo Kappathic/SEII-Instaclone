@@ -1,4 +1,4 @@
-$post-width: 1000px;
+$post-width: 800px;
 #post-container{
   margin-top: $post-width/10;
   display: grid;
@@ -87,11 +87,16 @@ $post-width: 1000px;
 }
 #post-footer-toolbar{
   display: grid;
-  grid-template-columns: 7% 7% 7% 1fr;
-  border-bottom-left-radius: 2rem;
-  border-bottom-right-radius: 2rem;
+  grid-template-columns: 7% 7%  1fr;
   padding-left: 0.75rem;
 }
 #post-comment-section-add{
   width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #393939;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  color: #F2F2F2;
+  font-size: 18px;
 }
