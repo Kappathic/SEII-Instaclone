@@ -48,7 +48,8 @@ import { PostContainerComponent } from './post-container/post-container.componen
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSnackBarModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule
   ],
   providers: [
     CookieService,
