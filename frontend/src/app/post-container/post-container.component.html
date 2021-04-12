@@ -1,0 +1,20 @@
+<div id="post-container" [class.mat-elevation-z10]="isActive" [class.mat-elevation-z15]="!isActive" (mouseenter)="isActive = !isActive" (mouseleave)="isActive = !isActive">
+  <div id="post-header">
+    <mat-toolbar id="post-header-toolbar">
+      <div id="post-profile-picture-container">
+        <img src="https://source.unsplash.com/random/100x100" id="post-profile-picture">
+      </div>
+      <a id="post-username"> Dummy us3rn4me!</a>
+    </mat-toolbar>
+  </div>
+  <div id="post-content">
+    <img src="https://source.unsplash.com/random/1000x1000">
+  </div>
+  <div id="post-footer">
+    <mat-toolbar id="post-footer-toolbar">
+      <mat-icon aria-label="Like-Post" (click)="test()">favorite</mat-icon>
+      <mat-icon aria-hidden="false" aria-label="Like-Post">favorite_border</mat-icon>
+      <mat-icon aria-hidden="false" aria-label="Like-Post">question_answer</mat-icon>
+    </mat-toolbar>
+  </div>
+</div>
