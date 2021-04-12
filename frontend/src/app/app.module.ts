@@ -27,6 +27,8 @@ import { LegalDisclosureComponent } from './legal-disclosure/legal-disclosure.co
 import { PrivacyNoticeComponent } from './privacy-notice/privacy-notice.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import {FormsModule} from "@angular/forms";
+import { PostContainerComponent } from './post-container/post-container.component';
+
 
 @NgModule({
   declarations: [
@@ -39,6 +41,7 @@ import {FormsModule} from "@angular/forms";
     FooterComponent,
     LegalDisclosureComponent,
     PrivacyNoticeComponent,
+    PostContainerComponent,
     AddPostComponent
   ],
   imports: [
