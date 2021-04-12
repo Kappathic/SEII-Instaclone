@@ -18,9 +18,11 @@ class DelaygramBackendApplication(
             "admin",
             "\$2y\$10\$mt1Ev5vlAx2/RZrlFicF1uQNJk3SCGiCYLn.exBGEHL09hwWJfUNi",
             "admin",
+            "Das ist das Profil vom Admin",
             "admin@example.com",
             null,
             mutableListOf(),
+            0,
             mutableSetOf()
         )
         val post1 = Post("Das ist der erste Post",null, setOf("test1","test2"))
@@ -32,9 +34,11 @@ class DelaygramBackendApplication(
                 "user",
                 "\$2y\$10\$mt1Ev5vlAx2/RZrlFicF1uQNJk3SCGiCYLn.exBGEHL09hwWJfUNi",
                 "user",
+                "Das ist das Profil vom User",
                 "user@example.com",
                 null,
                 mutableListOf(),
+                0,
                 mutableSetOf()
             )
         )

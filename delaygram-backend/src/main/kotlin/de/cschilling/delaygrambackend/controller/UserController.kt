@@ -1,7 +1,6 @@
 package de.cschilling.delaygrambackend.controller
 
 import de.cschilling.delaygrambackend.model.User
-import de.cschilling.delaygrambackend.repository.UserRepository
 import de.cschilling.delaygrambackend.service.UserService
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
@@ -47,6 +46,11 @@ class UserController(
     fun getFollower(@PathVariable id: Long) = userService.getFollower(id)
 
     @PreAuthorize("isAuthenticated()")
+    @GetMapping("/getFollows/{username}")
+    fun getFollows(@PathVariable username: String) = userService.getUserByUsername(username).follows
+
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/profile/{username}")
     fun getProfile(@PathVariable username: String) = userService.getUserByUsername(username)
+
 }
