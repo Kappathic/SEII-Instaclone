@@ -26,7 +26,7 @@ import { SnackBarService } from './snack-bar-service.service';
 import { LegalDisclosureComponent } from './legal-disclosure/legal-disclosure.component';
 import { PrivacyNoticeComponent } from './privacy-notice/privacy-notice.component';
 import { AddPostComponent } from './add-post/add-post.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule} from '@angular/forms';
 import { PostContainerComponent } from './post-container/post-container.component';
 
 
@@ -55,7 +55,8 @@ import { PostContainerComponent } from './post-container/post-container.componen
     FormsModule,
     HttpClientModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatIconModule
   ],
   providers: [
     CookieService,
