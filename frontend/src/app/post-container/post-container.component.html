@@ -1,20 +1,34 @@
-<div id="post-container" [class.mat-elevation-z10]="isActive" [class.mat-elevation-z15]="!isActive" (mouseenter)="isActive = !isActive" (mouseleave)="isActive = !isActive">
+<div id="post-container">
   <div id="post-header">
     <mat-toolbar id="post-header-toolbar">
       <div id="post-profile-picture-container">
         <img src="https://source.unsplash.com/random/100x100" id="post-profile-picture">
       </div>
       <a id="post-username"> Dummy us3rn4me!</a>
+      <div id="post-meta-information">
+        <div class="post-meta-content">
+          <mat-icon aria-label="Like-Post" class="post-meta-icon" color="primary">favorite</mat-icon>
+          <span> 13.458 </span>
+          <mat-icon aria-label="Like-Post" class="post-meta-icon" color="primary">question_answer</mat-icon>
+          <span> 948 </span>
+        </div>
+      </div>
     </mat-toolbar>
   </div>
   <div id="post-content">
-    <img src="https://source.unsplash.com/random/1000x1000">
+    <img src="https://source.unsplash.com/random/800x800" style="width: 800px; height: 800px;">
   </div>
   <div id="post-footer">
     <mat-toolbar id="post-footer-toolbar">
-      <mat-icon aria-label="Like-Post" (click)="test()">favorite</mat-icon>
-      <mat-icon aria-hidden="false" aria-label="Like-Post">favorite_border</mat-icon>
-      <mat-icon aria-hidden="false" aria-label="Like-Post">question_answer</mat-icon>
+      <mat-icon aria-label="Like-Post" *ngIf="isLiked" (click)="isLiked = !isLiked" color="primary">favorite</mat-icon>
+      <mat-icon aria-label="Like-Post" *ngIf="!isLiked" (click)="isLiked = !isLiked" color="primary">favorite_border</mat-icon>
+      <mat-icon aria-label="Like-Post" color="primary" >question_answer</mat-icon>
     </mat-toolbar>
+  </div>
+  <div id="post-comment-section">
+    <mat-form-field id="post-comment-section-add">
+      <mat-label>Leave a comment</mat-label>
+      <input matInput placeholder="I really like your post!">
+    </mat-form-field>
   </div>
 </div>

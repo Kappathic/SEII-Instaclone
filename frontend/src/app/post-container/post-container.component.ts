@@ -11,6 +11,7 @@ export class PostContainerComponent implements OnInit {
   constructor(
     private snackBar: SnackBarService
   ) {}
+  isLiked = false;
   ngOnInit(): void {
   }
   test(): void{
