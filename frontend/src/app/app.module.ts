@@ -28,6 +28,7 @@ import { PrivacyNoticeComponent } from './privacy-notice/privacy-notice.componen
 import { AddPostComponent } from './add-post/add-post.component';
 import {FormsModule} from '@angular/forms';
 import { PostContainerComponent } from './post-container/post-container.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { PostContainerComponent } from './post-container/post-container.componen
     LegalDisclosureComponent,
     PrivacyNoticeComponent,
     PostContainerComponent,
-    AddPostComponent
+    AddPostComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
