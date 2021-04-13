@@ -36,7 +36,10 @@ class SecurityConfig(
     }
 
     @Bean
-    fun authenticationProvider(jwtUserDetailsService: JwtUserDetailsService?, passwordEncoder: PasswordEncoder?): AuthenticationProvider? {
+    fun authenticationProvider(
+        jwtUserDetailsService: JwtUserDetailsService?,
+        passwordEncoder: PasswordEncoder?
+    ): AuthenticationProvider? {
         val provider = DaoAuthenticationProvider()
         provider.setUserDetailsService(jwtUserDetailsService)
         provider.setPasswordEncoder(passwordEncoder)

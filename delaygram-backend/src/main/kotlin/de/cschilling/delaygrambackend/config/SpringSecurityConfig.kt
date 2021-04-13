@@ -22,8 +22,8 @@ class SpringSecurityConfig(
 ) : WebSecurityConfigurerAdapter() {
     @Throws(Exception::class)
     override fun configure(http: HttpSecurity) {
-        http.headers().frameOptions().disable();
-        http.csrf().disable()
+        http.headers().frameOptions().disable().and()
+            .csrf().disable()
             .cors().configurationSource(corsConfigurationSource()).and()
             .authorizeRequests()
             .anyRequest().permitAll()
@@ -31,6 +31,7 @@ class SpringSecurityConfig(
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .addFilterBefore(jwtFilter, RequestHeaderAuthenticationFilter::class.java)
     }
+
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource? {
         val configuration = CorsConfiguration()

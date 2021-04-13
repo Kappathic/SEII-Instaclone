@@ -5,7 +5,6 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
 import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
-import java.lang.Error
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -18,7 +17,11 @@ class JwtFilter(
     private val COOKIE_HEADER = "cookie"
 
     @Throws
-    override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
+    override fun doFilterInternal(
+        request: HttpServletRequest,
+        response: HttpServletResponse,
+        filterChain: FilterChain
+    ) {
         try {
             getToken(request)
                 ?.let { jwtUserDetailsService.loadUserByToken(it) }
@@ -29,7 +32,7 @@ class JwtFilter(
                     )
                 }
                 .let { SecurityContextHolder.getContext().authentication = it }
-                } catch (e: Error) {
+        } catch (e: Error) {
             println(e.localizedMessage)
         }
 

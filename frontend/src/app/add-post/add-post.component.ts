@@ -41,17 +41,14 @@ export class AddPostComponent implements OnInit {
 
    addPost(): void{
      if (this.picture){
-       const requestUrl = 'http://localhost:5000/post';
-       this.http.post(requestUrl, {
-       }).subscribe(
+       const requestUrl = 'api/post';
+       this.http.post(requestUrl, {}).subscribe(
          (data: any) => {
+           console.log('Post successful!');
+           this.snackBar.open('Post successful!', 'close');
          },
          (error) => {
            switch (error.status) {
-             case 200:
-               console.log('Post successful!');
-               this.snackBar.open('Post successful!', 'close');
-               break;
              case 400:
                console.log('Something went wrong posting your picture please try again later!');
                this.snackBar.open('Something went wrong posting your picture please try again later!', 'close');

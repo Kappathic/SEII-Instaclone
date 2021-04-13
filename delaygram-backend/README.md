@@ -26,3 +26,6 @@
 ![image](https://user-images.githubusercontent.com/37246071/113479769-324ce100-9491-11eb-8a28-cae37fb45da8.png)
 
 
+## To open the Backend Swagger Documentation
+
+http://localhost:8080/swagger-ui.html

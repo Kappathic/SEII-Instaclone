@@ -26,7 +26,7 @@ class JwtUserDetailsService(
     override fun loadUserByUsername(username: String): JwtUserDetails {
         return userRepository
             .findByUsername(username)
-            ?.let { getUserDetails(it, createToken(it)) }
+            .let { getUserDetails(it, createToken(it)) }
             ?: throw Exception("Username or password didn't match")
     }
 
@@ -39,7 +39,7 @@ class JwtUserDetailsService(
             .withIssuedAt(Date.from(now))
             .withExpiresAt(Date.from(expiry))
             .withSubject(user.username)
-                .withClaim("id", user.id)
+            .withClaim("id", user.id)
             .sign(algorithm)
     }
 
@@ -55,8 +55,8 @@ class JwtUserDetailsService(
 
     fun loadUserByToken(token: String): JwtUserDetails? {
         return getDecodedToken(token)?.subject
-                ?.let { userRepository.findByUsername(it) }
-                ?.let { getUserDetails(it, token) } ?: throw Error("Error in validating token")
+            ?.let { userRepository.findByUsername(it) }
+            ?.let { getUserDetails(it, token) } ?: throw Error("Error in validating token")
 
     }
 

@@ -25,23 +25,21 @@ export class LoginComponent implements OnInit {
   // We are aware that this is by far not a safe method to organize user-sessions, but with this project we did not focus on security.
   // Depending on the Status callback, the user gets notified if his credentials are wrong or if his username does not exist.
   submitLogin(): void {
-    const requestUrl = 'http://localhost:5000/login';
+    const requestUrl = 'api/auth/login';
     this.http.post(requestUrl, {
       username: this.username,
       password: this.password
     }).subscribe(
       (data: any) => {
         console.log(data);
+        console.log('successfully Logged in!');
+        this.snackBar.open('Successfully Logged In!', 'close');
+        // Creating a SessionId cookie that validates the user Session - Expires in 30 minutes (1/48 of a Day)
+        this.cookieService.set('sessionId', this.username, {path: '/', expires: 1 / 48});
+        this.router.navigate(['home']);
       },
       (error) => {
         switch (error.status) {
-          case 200:
-            console.log('successfully Logged in!');
-            this.snackBar.open('Successfully Logged In!', 'close');
-            // Creating a SessionId cookie that validates the user Session - Expires in 30 minutes (1/48 of a Day)
-            this.cookieService.set('sessionId', this.username, {path: '/', expires: 1 / 48});
-            this.router.navigate(['home']);
-            break;
           case 401:
             console.log('Wrong credentials');
             this.snackBar.open('Wrong credentials', 'close');
