@@ -1,0 +1,17 @@
+.login-container{
+  width: 600px;
+  padding: 50px;
+  background: #2a67ff;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+.form-container{
+  width: 60%;
+}
+.login-button{
+  width: 128px;
+  min-width: 10%;
+  margin-top: 10px;
+}

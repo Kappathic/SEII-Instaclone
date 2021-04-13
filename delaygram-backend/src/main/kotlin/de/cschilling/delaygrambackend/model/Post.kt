@@ -6,7 +6,7 @@ import javax.persistence.*
 
 @Entity
 class Post(
-    val description: String,
+    val description: String?,
     @Lob
     var image: ByteArray?,
     @ElementCollection

@@ -1,0 +1,26 @@
+.post-container{
+  width: 600px;
+  padding: 50px;
+  background: #2a67ff;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+.form-container{
+  width: 60%;
+  margin: auto;
+}
+
+.styledUploadButton{
+  background-color: #393939;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  font-family: Source Sans Pro;
+  font-size: 14px;
+  font-weight: 400;
+}

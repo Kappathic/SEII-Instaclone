@@ -25,6 +25,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { SnackBarService } from './snack-bar-service.service';
 import { LegalDisclosureComponent } from './legal-disclosure/legal-disclosure.component';
 import { PrivacyNoticeComponent } from './privacy-notice/privacy-notice.component';
+import { AddPostComponent } from './add-post/add-post.component';
+import {FormsModule} from '@angular/forms';
+import { PostContainerComponent } from './post-container/post-container.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +40,9 @@ import { PrivacyNoticeComponent } from './privacy-notice/privacy-notice.componen
     HeaderComponent,
     FooterComponent,
     LegalDisclosureComponent,
-    PrivacyNoticeComponent
+    PrivacyNoticeComponent,
+    PostContainerComponent,
+    AddPostComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +51,12 @@ import { PrivacyNoticeComponent } from './privacy-notice/privacy-notice.componen
     MatButtonModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    FormsModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule
   ],
   providers: [
     CookieService,

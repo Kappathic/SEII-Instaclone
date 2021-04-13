@@ -1,0 +1,102 @@
+$post-width: 800px;
+#post-container{
+  margin-top: $post-width/10;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  box-shadow:
+    0 0 0 6px #2A67FF,
+    0 0 25px 12px #393939;
+  transition: box-shadow 0.2s ease-in-out;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+}
+#post-container:hover{
+  box-shadow:
+    0 0 0 6px #2A67FF,
+    0 0 25px 12px #56CCF2;
+}
+#post-header{
+  width: $post-width;
+  height: $post-width/10;
+}
+#post-header-toolbar{
+  display: grid;
+  height: 100%;
+  grid-template-columns: $post-width/10 1fr $post-width/6;
+  grid-column-gap: $post-width/20;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  padding-left: 0.75rem;
+}
+#post-profile-picture-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $post-width/13+8;
+  height: $post-width/13+8;
+  background-color: #2A67FF;
+  border-radius: 25%;
+  cursor: pointer;
+}
+#post-profile-picture{
+  width: $post-width/13;
+  height: $post-width/13;
+  border-radius: 25%;
+}
+#post-username{
+  color: #F2F2F2;
+  font-size: 24px;
+  font-weight: 400;
+  margin: 0px;
+  align-self: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+#post-meta-information{
+  display: flex;
+  flex-direction: column;
+}
+.post-meta-content{
+  display: grid;
+  grid-template-columns: 30% 1fr;
+  align-items: center;
+  vertical-align: center;
+  margin: 0;
+}
+.post-meta-icon{
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+}
+#post-content{
+  width: $post-width;
+  height: $post-width;
+  background-color: #2a67ff;
+}
+#post-footer{
+  width: $post-width;
+  .mat-icon{
+    width: $post-width/20;
+    height: $post-width/20;
+    font-size: $post-width/20;
+    cursor: pointer;
+  }
+}
+#post-footer-toolbar{
+  display: grid;
+  grid-template-columns: 7% 7%  1fr;
+  padding-left: 0.75rem;
+}
+#post-comment-section-add{
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #393939;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  color: #F2F2F2;
+  font-size: 18px;
+}

@@ -273,9 +273,29 @@ button{
 button:hover{
   background-color: #0BE9E9!important; ;
 }
-
 a{
   color: #2a67ff;
   margin: 12px;
   text-decoration: none;
+}
+.mat-form-field-underline {
+  background-color: #0BE9E9;
+}
+.mat-form-field{
+  color: white!important;
+  font-weight: 600;
+}
+.mat-form-field-ripple {
+  background-color: #0BE9E9;
+}
+
+// Global used classes
+.page-container{
+  padding-top: 50px;
+  padding-bottom: 200px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
 }
