@@ -7,10 +7,11 @@ import {SnackBarService} from '../snack-bar-service.service';
   styleUrls: ['./post-container.component.scss']
 })
 export class PostContainerComponent implements OnInit {
-  public isActive = true;
   constructor(
     private snackBar: SnackBarService
   ) {}
+  isActive = true;
+  username = 'Kappathic';
   isLiked = false;
   ngOnInit(): void {
   }

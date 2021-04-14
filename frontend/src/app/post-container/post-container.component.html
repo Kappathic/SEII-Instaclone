@@ -1,10 +1,12 @@
 <div id="post-container">
   <div id="post-header">
     <mat-toolbar id="post-header-toolbar">
-      <div id="post-profile-picture-container">
-        <img src="https://source.unsplash.com/random/100x100" id="post-profile-picture">
-      </div>
-      <a id="post-username"> Dummy us3rn4me!</a>
+      <a href="/profile/{{username}}" style="margin: 0;">
+        <div id="post-profile-picture-container">
+          <img src="https://source.unsplash.com/random/100x100" id="post-profile-picture">
+        </div>
+      </a>
+      <a id="post-username" href="/profile/{{username}}">Kappathic</a>
       <div id="post-meta-information">
         <div class="post-meta-content">
           <mat-icon aria-label="Like-Post" class="post-meta-icon" color="primary">favorite</mat-icon>
@@ -15,7 +17,7 @@
       </div>
     </mat-toolbar>
   </div>
-  <div id="post-content">
+  <div id="post-content" (dblclick)="isLiked = !isLiked">
     <img src="https://source.unsplash.com/random/800x800" style="width: 800px; height: 800px;">
   </div>
   <div id="post-footer">
