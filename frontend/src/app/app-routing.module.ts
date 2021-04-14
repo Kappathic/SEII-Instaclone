@@ -8,6 +8,7 @@ import {LegalDisclosureComponent} from './legal-disclosure/legal-disclosure.comp
 import {PrivacyNoticeComponent} from './privacy-notice/privacy-notice.component';
 import {AuthGuardService} from './auth-guard.service';
 import {AddPostComponent} from './add-post/add-post.component';
+import {UserProfileComponent} from "./user-profile/user-profile.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegistrationComponent
+  },
+  {
+    path: 'profile',
+    component: UserProfileComponent
   },
   {
     path: 'legal-disclosure',
