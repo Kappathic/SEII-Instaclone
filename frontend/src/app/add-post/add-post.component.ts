@@ -14,6 +14,7 @@ export class AddPostComponent implements OnInit {
 
   picture: any;
   description: any;
+  hashtag: any;
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -22,7 +23,12 @@ export class AddPostComponent implements OnInit {
   ){}
 
   checkLogin(): boolean{
-    return this.cookieService.check('sessionId');
+      const temp: string | null = localStorage.getItem('currentUser');
+      if (temp){
+        return true;
+      }else{
+        return false;
+      }
   }
 
   onPictureChange(event: any): void{
@@ -42,7 +48,11 @@ export class AddPostComponent implements OnInit {
    addPost(): void{
      if (this.picture){
        const requestUrl = 'api/post';
-       this.http.post(requestUrl, {}).subscribe(
+       this.http.post(requestUrl, {
+         image: this.picture,
+         description: this.description,
+         hashtag: this.hashtag
+       }).subscribe(
          (data: any) => {
            console.log('Post successful!');
            this.snackBar.open('Post successful!', 'close');

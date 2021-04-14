@@ -17,6 +17,7 @@ export class RegistrationComponent implements OnInit {
   mail: any;
   password: any;
   confirmPassword: any;
+  bio: any;
 
   constructor(
     private http: HttpClient,
@@ -26,14 +27,13 @@ export class RegistrationComponent implements OnInit {
   // Sends register Request to login API endpoint via JSON file - password hashing is done on backend side
   // Status Callbacks trigger a Snackbar pop up on the bottom of the Screen to let the user know if his registration was successful
   registerUser(): void {
-    if (this.password == this.confirmPassword) {
-      const requestUrl = 'http://localhost:5000/register';
+    if (this.password === this.confirmPassword) {
+      const requestUrl = 'api/auth/register';
       this.http.post(requestUrl, {
         username: this.username,
-        prename: this.prename,
-        name: this.name,
         mail: this.mail,
-        password: this.password
+        password: this.password,
+        description: this.bio
       }).subscribe(
         (data: any) => {
         },

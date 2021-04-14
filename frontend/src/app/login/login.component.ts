@@ -34,9 +34,8 @@ export class LoginComponent implements OnInit {
         console.log(data);
         console.log('successfully Logged in!');
         this.snackBar.open('Successfully Logged In!', 'close');
-        // Creating a SessionId cookie that validates the user Session - Expires in 30 minutes (1/48 of a Day)
-        this.cookieService.set('sessionId', this.username, {path: '/', expires: 1 / 48});
         this.router.navigate(['home']);
+        localStorage.setItem('currentUser', data['username']);
       },
       (error) => {
         switch (error.status) {

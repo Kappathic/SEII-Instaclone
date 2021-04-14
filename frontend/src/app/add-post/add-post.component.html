@@ -1,5 +1,5 @@
 <div class="post-container">
-<!--  <div *ngIf="checkLogin()" class="post-container"> delete the comment string as soon as login is implemented-->
+  <div *ngIf="checkLogin()" class="post-container">
   <img *ngIf="picture" [src]="picture" class="post-container">
   <input type="file" accept="image/*"  (change)="onPictureChange($event)" id="styledUpload" hidden/>
   <label *ngIf="!picture" for="styledUpload" class="styledUploadButton">Datei auswählen</label>
@@ -9,6 +9,16 @@
         <input matInput placeholder="Bildbeschreibung" [(ngModel)]="description">
       </label>
     </mat-form-field>
+  <mat-form-field appearance="fill" class="form-container">
+    <mat-label>Hashtag</mat-label>
+    <label>
+      <input matInput placeholder="Hashtag" [(ngModel)]="hashtag">
+    </label>
+  </mat-form-field>
+
     <button *ngIf="picture" mat-raised-button  (click)="addPost()">Post</button>
-<!--    <div>-->
+  </div>
+  <div *ngIf="!checkLogin()" class="post-container">
+    <mat-label>Please log in to use this function!</mat-label>
+  </div>
 </div>
