@@ -1,5 +1,6 @@
 package de.cschilling.delaygrambackend.service
 
+import de.cschilling.delaygrambackend.model.Comment
 import de.cschilling.delaygrambackend.model.Post
 import de.cschilling.delaygrambackend.model.User
 import de.cschilling.delaygrambackend.repository.PostRepository
@@ -37,5 +38,12 @@ class PostService(
         val user = userService.getCurrentUser()
         posts.addAll(user.follows.flatMap {followUser -> followUser.posts })
         return posts
+    }
+
+    fun addCommentToPost(id: Long, comment: Comment): Post {
+        val post = postRepository.findByIdOrNull(id)
+            ?: throw NoSuchElementException("No matching Post found")
+        post.comments.add(comment)
+        return postRepository.save(post)
     }
 }

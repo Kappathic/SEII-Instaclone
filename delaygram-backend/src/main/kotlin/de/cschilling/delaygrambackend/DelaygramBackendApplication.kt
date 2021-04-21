@@ -25,7 +25,7 @@ class DelaygramBackendApplication(
             0,
             mutableSetOf()
         )
-        val post1 = Post("Das ist der erste Admin Post",null, setOf("test1","test2"))
+        val post1 = Post("Das ist der erste Admin Post",null, mutableListOf(),setOf("test1","test2"))
         postRepository.save(post1)
         user1.posts.add(post1)
         userRepository.save(user1)
@@ -37,7 +37,10 @@ class DelaygramBackendApplication(
                 "Das ist das Profil vom User",
                 "user@example.com",
                 null,
-                mutableListOf(postRepository.save(Post("Das ist der erste User Post",null, setOf("test1","test2")))),
+                mutableListOf(postRepository.save(Post("Das ist der erste User Post",
+                    null,
+                    mutableListOf(),
+                setOf("test1","test2")))),
                 0,
                 mutableSetOf()
             )

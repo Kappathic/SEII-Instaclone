@@ -30,7 +30,7 @@ class AuthenticationController(
         logger.info(user.toString())
         response.setHeader(
             "Set-Cookie",
-            "Bearer ${jwtUserDetailsService.createToken(user)}; Secure; HttpOnly; SameSite=Strict;Max-Age=600;Path=/ "
+            "JWT=Bearer ${jwtUserDetailsService.createToken(user)}; Secure; HttpOnly; SameSite=Strict;Max-Age=600;Path=/ "
         )
         return user
     }
@@ -43,7 +43,7 @@ class AuthenticationController(
     @PostMapping("/logout")
     fun logout(response: HttpServletResponse, request: HttpServletRequest): String {
         val jwtToken = request.getHeader("cookie").substringAfter("Bearer ")
-        response.setHeader("Set-Cookie", "Bearer ${jwtToken}; Secure; HttpOnly; SameSite=Strict;Max-Age=-1;Path=/")
+        response.setHeader("Set-Cookie", "JWT=Bearer ${jwtToken}; Secure; HttpOnly; SameSite=Strict;Max-Age=-1;Path=/")
         return "{\"logout\": \"true\"}"
     }
 
