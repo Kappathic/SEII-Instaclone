@@ -40,6 +40,9 @@ class UserController(
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/follow/{id}")
     fun followUser(@PathVariable id: Long) = userService.followUser(id)
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/unfollow/{id}")
+    fun unfollowUser(@PathVariable id: Long) = userService.unfollowUser(id)
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/follower/{id}")
