@@ -18,7 +18,7 @@
       Login
     </button>
   </div>
-  <button mat-raised-button class="navbar-button" routerLink="/home" routerLinkActive="active" *ngIf="isLoggedIn">
+  <button mat-raised-button class="navbar-button" routerLink="/home" routerLinkActive="active" (click)="submitLogout()" *ngIf="isLoggedIn">
     Logout
   </button>
 </div>
