@@ -19,10 +19,16 @@ export class HeaderComponent implements OnInit {
     this.http.post(requestUrl, {
     }).subscribe(
       (data: any) => {
-        console.log(data);
-        console.log('successfully Logged out!');
-        this.snackBar.open('Successfully Logged Out!', 'Close');
-        this.router.navigate(['home']);
+        if (data.status === 200) {
+          localStorage.removeItem('username');
+          console.log(data);
+          console.log('successfully Logged out!');
+          this.snackBar.open('Successfully Logged Out!', 'Close');
+          this.router.navigate(['home']);
+        }
+        else{
+          this.snackBar.open('Something went wrong!', 'Close');
+        }
       },
       (error) => {
           this.snackBar.open('Something went wrong!', 'Close');
