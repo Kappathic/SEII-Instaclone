@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, DoCheck } from '@angular/core';
 import { SnackBarService } from '../snack-bar-service.service';
 import {CookieService} from 'ngx-cookie-service';
 
@@ -7,10 +7,17 @@ import {CookieService} from 'ngx-cookie-service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements DoCheck {
+  isLoggedIn = false;
+  temp: string | null = localStorage.getItem('currentUser');
   constructor(
     private snackBar: SnackBarService,
     private cookieService: CookieService) { }
-  ngOnInit(): void {
+  ngDoCheck(): void {
+    if (this.temp){
+      this.isLoggedIn = true;
+    } else {
+      this.isLoggedIn = false;
+    }
   }
 }

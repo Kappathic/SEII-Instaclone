@@ -14,11 +14,11 @@
     <button mat-raised-button class="navbar-button" routerLink="/profile" routerLinkActive="active">
       Profile
     </button>
-    <button mat-raised-button class="navbar-button" routerLink="/login" routerLinkActive="active">
+    <button mat-raised-button class="navbar-button" routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn">
       Login
     </button>
   </div>
-  <button mat-raised-button class="navbar-button" routerLink="/home" routerLinkActive="active">
+  <button mat-raised-button class="navbar-button" routerLink="/home" routerLinkActive="active" *ngIf="isLoggedIn">
     Logout
   </button>
 </div>
