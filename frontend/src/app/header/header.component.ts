@@ -1,4 +1,4 @@
-import {Component, DoCheck } from '@angular/core';
+import {Component, DoCheck, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import { SnackBarService } from '../snack-bar-service.service';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
@@ -8,28 +8,27 @@ import {Router} from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements DoCheck {
+export class HeaderComponent implements DoCheck{
   isLoggedIn = false;
-  temp: string | null = localStorage.getItem('currentUser');
   constructor(
     private snackBar: SnackBarService,
     private http: HttpClient,
     private router: Router
   ) {}
-  
+
   submitLogout(): void {
     const requestUrl = 'api/auth/logout';
+    localStorage.removeItem('currentUser');
+    this.isLoggedIn = false;
     this.http.post(requestUrl, {
     }).subscribe(
       (data: any) => {
-        if (data.status === 200) {
-          localStorage.removeItem('username');
+        if (data) {
           console.log(data);
           console.log('successfully Logged out!');
           this.snackBar.open('Successfully Logged Out!', 'Close');
           this.router.navigate(['home']);
-        }
-        else{
+        }else{
           this.snackBar.open('Something went wrong!', 'Close');
         }
       },
@@ -38,12 +37,12 @@ export class HeaderComponent implements DoCheck {
       }
     );
   }
-  
+
+
   ngDoCheck(): void {
-    if (this.temp){
+    if(localStorage.getItem('currentUser')){
       this.isLoggedIn = true;
-    } else {
-      this.isLoggedIn = false;
     }
   }
+
 }

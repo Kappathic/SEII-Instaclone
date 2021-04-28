@@ -8,19 +8,21 @@
     <button mat-raised-button class="navbar-button" routerLink="/home" routerLinkActive="active">
       Home
     </button>
-    <button mat-raised-button class="navbar-button" routerLink="/add-post" routerLinkActive="active">
-      Add Post
-    </button>
-    <button mat-raised-button class="navbar-button" routerLink="/profile" routerLinkActive="active">
-      Profile
-    </button>
+    <ng-container *ngIf="isLoggedIn">
+      <button mat-raised-button class="navbar-button" routerLink="/add-post" routerLinkActive="active">
+        Add Post
+      </button>
+      <button mat-raised-button class="navbar-button" routerLink="/profile" routerLinkActive="active">
+        Profile
+      </button>
+      <button mat-raised-button class="navbar-button" routerLink="/home" routerLinkActive="active" (click)="submitLogout()">
+        Logout
+      </button>
+    </ng-container>
     <button mat-raised-button class="navbar-button" routerLink="/login" routerLinkActive="active" *ngIf="!isLoggedIn">
       Login
     </button>
   </div>
-  <button mat-raised-button class="navbar-button" routerLink="/home" routerLinkActive="active" (click)="submitLogout()" *ngIf="isLoggedIn">
-    Logout
-  </button>
 </div>
 
 
