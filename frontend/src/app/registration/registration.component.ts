@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {SnackBarService} from "../snack-bar-service.service";
-import {HttpClient} from "@angular/common/http";
+import {SnackBarService} from '../snack-bar-service.service';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -31,9 +31,10 @@ export class RegistrationComponent implements OnInit {
       const requestUrl = 'api/auth/register';
       this.http.post(requestUrl, {
         username: this.username,
-        mail: this.mail,
+        email: this.mail,
         password: this.password,
-        description: this.bio
+        description: this.bio,
+        profilePic: this.picture.split(',')[1]
       }).subscribe(
         (data: any) => {
         },
@@ -58,7 +59,16 @@ export class RegistrationComponent implements OnInit {
       this.snackBar.open('Passwords do not match!', 'close');
     }
   }
+  onPictureChange(event: any): void{
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (event: ProgressEvent) => {
+        this.picture = (event.target as FileReader).result;
+      };
 
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
   ngOnInit(): void {
   }
 }
