@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   // We are aware that this is by far not a safe method to organize user-sessions, but with this project we did not focus on security.
   // Depending on the Status callback, the user gets notified if his credentials are wrong or if his username does not exist.
   submitLogin(): void {
-    const requestUrl = 'http://localhost:8080/api/auth/login';
+    const requestUrl = 'api/auth/login';
     this.http.post(requestUrl, {
       username: this.username,
       password: this.password

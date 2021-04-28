@@ -10,8 +10,10 @@ import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.crypto.password.PasswordEncoder
+import org.springframework.stereotype.Component
 
 @Configuration
+@Component
 class SecurityConfig(
     val securityProperties: SecurityProperties
 ) {
@@ -31,7 +33,7 @@ class SecurityConfig(
     }
 
     @Bean
-    fun passwordEncoder(): PasswordEncoder? {
+    fun passwordEncoder(): PasswordEncoder {
         return BCryptPasswordEncoder(securityProperties.passwordStrength)
     }
 

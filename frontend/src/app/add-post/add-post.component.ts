@@ -14,7 +14,7 @@ export class AddPostComponent implements OnInit {
 
   picture: any;
   description: any;
-  hashtag: any;
+  hashtags: any;
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -49,9 +49,9 @@ export class AddPostComponent implements OnInit {
      if (this.picture){
        const requestUrl = 'api/post';
        this.http.post(requestUrl, {
-         image: this.picture,
+         image: this.picture.split(',')[1],
          description: this.description,
-         hashtag: this.hashtag
+         hashtags: [this.hashtags]
        }).subscribe(
          (data: any) => {
            console.log('Post successful!');
