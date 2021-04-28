@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {SnackBarService} from "../snack-bar-service.service";
-import {CookieService} from "ngx-cookie-service";
-import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
+import {SnackBarService} from '../snack-bar-service.service';
+import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',

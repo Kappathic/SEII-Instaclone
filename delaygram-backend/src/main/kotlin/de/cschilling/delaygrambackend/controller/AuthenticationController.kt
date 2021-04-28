@@ -32,7 +32,7 @@ class AuthenticationController(
         logger.info(user.toString())
         response.setHeader(
             "Set-Cookie",
-            "JWT=Bearer ${jwtUserDetailsService.createToken(user)}; Secure; HttpOnly; SameSite=Strict;Max-Age=600;Path=/ "
+            "JWT=Bearer ${jwtUserDetailsService.createToken(user)}; Secure; HttpOnly; SameSite=Strict;Max-Age=60000;Path=/ "
         )
         return user
     }

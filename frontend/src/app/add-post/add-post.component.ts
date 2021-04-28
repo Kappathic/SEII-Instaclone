@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {CookieService} from 'ngx-cookie-service';
 import {HttpClient} from '@angular/common/http';
 import {SnackBarService} from '../snack-bar-service.service';
 import {Router} from '@angular/router';
@@ -20,7 +19,6 @@ export class AddPostComponent implements OnInit {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private cookieService: CookieService,
     private snackBar: SnackBarService
   ){}
 

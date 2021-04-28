@@ -21,7 +21,6 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {HttpClientModule} from '@angular/common/http';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CookieService } from 'ngx-cookie-service';
 import { SnackBarService } from './snack-bar-service.service';
 import { LegalDisclosureComponent } from './legal-disclosure/legal-disclosure.component';
 import { PrivacyNoticeComponent } from './privacy-notice/privacy-notice.component';
@@ -29,7 +28,7 @@ import { AddPostComponent } from './add-post/add-post.component';
 import {FormsModule} from '@angular/forms';
 import { PostContainerComponent } from './post-container/post-container.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import {ImageCropperModule} from "ngx-image-cropper";
+import {ImageCropperModule} from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -62,7 +61,6 @@ import {ImageCropperModule} from "ngx-image-cropper";
     ImageCropperModule
   ],
   providers: [
-    CookieService,
     SnackBarService
   ],
   bootstrap: [AppComponent]
