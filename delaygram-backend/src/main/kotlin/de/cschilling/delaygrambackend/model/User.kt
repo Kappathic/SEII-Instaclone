@@ -36,7 +36,4 @@ class User(
     @JsonBackReference
     var follows: MutableSet<User> = mutableSetOf()
 ):BaseEntity() {
-    override fun toString(): String {
-        return "User(id=$id, username='$username', password='$password', role=$role, email=$email, profilePic=${profilePic?.contentToString()}, follower=$follower)"
-    }
 }
