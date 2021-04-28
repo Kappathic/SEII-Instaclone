@@ -1,8 +1,19 @@
 <div class="post-container">
-  <div *ngIf="checkLogin()" class="post-container">
-  <img *ngIf="picture" [src]="picture" class="post-container">
-  <input type="file" accept="image/*"  (change)="onPictureChange($event)" id="styledUpload" hidden/>
-  <label *ngIf="!picture" for="styledUpload" class="styledUploadButton">Datei auswählen</label>
+    <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="1 / 1"
+      [resizeToHeight]="800"
+      [resizeToWidth]="800"
+      [backgroundColor]="bColor"
+      format="jpeg"
+      (imageCropped)="imageCropped($event)"
+      (loadImageFailed)="loadImageFailed()"
+      *ngIf="picture"
+    ></image-cropper>
+    <img *ngIf="picture" [src]="picture" id="cropped-image"/>
+    <input type="file" accept="image/*"  (change)="fileChangeEvent($event)" id="styledUpload" hidden/>
+    <label for="styledUpload" class="styledUploadButton">Datei auswählen</label>
     <mat-form-field appearance="fill" class="form-container">
       <mat-label>Bildbeschreibung</mat-label>
       <label>
@@ -15,10 +26,5 @@
       <input matInput placeholder="Hashtag" [(ngModel)]="hashtags">
     </label>
   </mat-form-field>
-
     <button *ngIf="picture" mat-raised-button  (click)="addPost()">Post</button>
-  </div>
-  <div *ngIf="!checkLogin()" class="post-container">
-    <mat-label>Please log in to use this function!</mat-label>
-  </div>
 </div>

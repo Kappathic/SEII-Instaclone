@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {CookieService} from 'ngx-cookie-service';
 import {HttpClient} from '@angular/common/http';
 import {SnackBarService} from '../snack-bar-service.service';
 import {Router} from '@angular/router';
-
+import {ImageCroppedEvent, ImageCropperModule} from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-add-post',
@@ -11,39 +10,17 @@ import {Router} from '@angular/router';
   styleUrls: ['./add-post.component.scss']
 })
 export class AddPostComponent implements OnInit {
-
   picture: any;
   description: any;
   hashtags: any;
+  imageChangedEvent: any = '';
+  croppedImage: any;
+  bColor = '#56CCF2';
   constructor(
     private router: Router,
     private http: HttpClient,
-    private cookieService: CookieService,
     private snackBar: SnackBarService
   ){}
-
-  checkLogin(): boolean{
-      const temp: string | null = localStorage.getItem('currentUser');
-      if (temp){
-        return true;
-      }else{
-        return false;
-      }
-  }
-
-  onPictureChange(event: any): void{
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-
-      reader.onload = (event: ProgressEvent) => {
-        this.picture = (event.target as FileReader).result;
-      };
-
-      reader.readAsDataURL(event.target.files[0]);
-    }
-  }
-
-
 
    addPost(): void{
      if (this.picture){
@@ -74,8 +51,26 @@ export class AddPostComponent implements OnInit {
      } else {
        this.snackBar.open('No picture to post found!', 'close');
      }
-   }
+  }
 
+
+  fileChangeEvent(event: any): void {
+    this.picture = event;
+    this.imageChangedEvent = event;
+  }
+  imageCropped(event: ImageCroppedEvent): void {
+    this.picture = event.base64;
+  }
+  imageLoaded(image: HTMLImageElement): void {
+    // show cropper
+  }
+  cropperReady(): void {
+    // cropper ready
+    this.snackBar.open('you can now crop image!', 'close');
+  }
+  loadImageFailed(): void {
+    this.snackBar.open('An Error occurred while loading your picture!', 'close');
+  }
   ngOnInit(): void {
   }
 }
