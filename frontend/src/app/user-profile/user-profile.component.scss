@@ -56,12 +56,12 @@ $profile-size: 1200px;
   grid-column-gap: $profile-size/50;
   grid-row-gap: $profile-size/50;
 }
-
-.dummy{
-  width: 100%;
+.post-container{
+  width: $profile-size/4;
+  height: $profile-size/4;
   box-shadow: 0 0 0px 1px #2A67FF;
 }
-.dummy-pic{
-  width: 100%;
-  height: 100%;
+.post-item{
+  width: $profile-size/4;
+  height: $profile-size/4;
 }

@@ -29,7 +29,7 @@ import { AddPostComponent } from './add-post/add-post.component';
 import {FormsModule} from '@angular/forms';
 import { PostContainerComponent } from './post-container/post-container.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-
+import {ImageCropperModule} from "ngx-image-cropper";
 
 @NgModule({
   declarations: [
@@ -58,7 +58,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     HttpClientModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
+    ImageCropperModule
   ],
   providers: [
     CookieService,
