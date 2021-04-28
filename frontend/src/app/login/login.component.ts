@@ -15,10 +15,9 @@ export class LoginComponent implements OnInit {
     username: any;
     password: any;
     constructor(
-    private router: Router,
-    private http: HttpClient,
-    private cookieService: CookieService,
-    private snackBar: SnackBarService) { }
+      private router: Router,
+      private http: HttpClient,
+      private snackBar: SnackBarService) { }
 
   // Sends login Request to login API endpoint via JSON file - password hashing is done on backend side
   // If Login is successful, a local Cookie is generated to start the User Session. (valid for 30 minutes)
