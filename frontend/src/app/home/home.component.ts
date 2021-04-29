@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
-import {SnackBarService} from "../snack-bar-service.service";
+import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {SnackBarService} from '../snack-bar-service.service';
 
 @Component({
   selector: 'app-home',
@@ -9,17 +9,19 @@ import {SnackBarService} from "../snack-bar-service.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  mainFeedPosts: any;
   constructor(
     private router: Router,
     private http: HttpClient,
     private snackBar: SnackBarService) { }
-  loadPosts(): void{
+  loadPosts(): any{
     const requestUrl = 'api/post/feed';
     this.http.get(requestUrl, {}).subscribe(
       (data: any) => {
         console.log(data);
         this.snackBar.open('Mainfeed loaded.', 'close');
+        this.mainFeedPosts = data;
+        return data;
       },
       (error) => {
         switch (error.status) {
@@ -38,9 +40,13 @@ export class HomeComponent implements OnInit {
         }
       }
     );
-}
-  ngOnInit(): void {
-    this.loadPosts();
   }
-
+  isLoggedIn(): boolean{
+    return !(localStorage.getItem('currentUser') == null);
+  }
+  ngOnInit(): void {
+    if (this.isLoggedIn()) {
+      this.loadPosts();
+    }
+  }
 }

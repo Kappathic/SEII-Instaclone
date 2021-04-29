@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SnackBarService} from '../snack-bar-service.service';
 import {HttpClient} from '@angular/common/http';
+import {ImageCroppedEvent} from "ngx-image-cropper";
 
 @Component({
   selector: 'app-registration',
@@ -14,10 +15,13 @@ export class RegistrationComponent implements OnInit {
   username: any;
   prename: any;
   name: any;
-  mail: any;
+  email: any;
   password: any;
   confirmPassword: any;
   bio: any;
+  imageChangedEvent: any = '';
+  croppedImage: any;
+  bColor = '#56CCF2';
 
   constructor(
     private http: HttpClient,
@@ -31,7 +35,7 @@ export class RegistrationComponent implements OnInit {
       const requestUrl = 'api/auth/register';
       this.http.post(requestUrl, {
         username: this.username,
-        email: this.mail,
+        email: this.email,
         password: this.password,
         description: this.bio,
         profilePic: this.picture.split(',')[1]
@@ -59,16 +63,24 @@ export class RegistrationComponent implements OnInit {
       this.snackBar.open('Passwords do not match!', 'close');
     }
   }
-  onPictureChange(event: any): void{
-    if (event.target.files && event.target.files[0]) {
-      const reader = new FileReader();
-      reader.onload = (event: ProgressEvent) => {
-        this.picture = (event.target as FileReader).result;
-      };
-
-      reader.readAsDataURL(event.target.files[0]);
-    }
+  fileChangeEvent(event: any): void {
+    this.picture = event;
+    this.imageChangedEvent = event;
   }
+  imageCropped(event: ImageCroppedEvent): void {
+    this.picture = event.base64;
+  }
+  imageLoaded(image: HTMLImageElement): void {
+    // show cropper
+  }
+  cropperReady(): void {
+    // cropper ready
+    this.snackBar.open('you can now crop image!', 'close');
+  }
+  loadImageFailed(): void {
+    this.snackBar.open('An Error occurred while loading your picture!', 'close');
+  }
+
   ngOnInit(): void {
   }
 }

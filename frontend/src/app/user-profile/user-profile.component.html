@@ -10,11 +10,18 @@
       <span class="userprofile-header-attr"> {{this.followerCount}} follower</span>
     </div>
   </mat-toolbar>
+  <div id="userprofile-biography-container">
+    <span id="userprofile-biography" >{{biography}}</span>
+  </div>
   <div id="userprofile-main-content">
     <div class="spacer" ></div>
     <div id="userprofile-main-posts">
       <div class="post-container" *ngFor="let post of this.userPosts">
-        <img class="post-item" [src]="convertPostItem(post.image)">
+        <img class="post-item" [src]="convertPostItem(post.image)" alt="a Picture on the User's profile.">
+          <div class="post-overlay-text">
+            <div id="post-overlay-description">{{post.description}}</div>
+            <div id="post-overlay-hashtags" *ngFor="let tag of post.hashtags">{{tag}}</div>
+          </div>
       </div>
     </div>
   </div>

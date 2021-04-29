@@ -40,7 +40,8 @@ export class HeaderComponent implements DoCheck{
 
 
   ngDoCheck(): void {
-    if(localStorage.getItem('currentUser')){
+    this.router.onSameUrlNavigation = 'reload';
+    if (localStorage.getItem('currentUser')){
       this.isLoggedIn = true;
     }
   }

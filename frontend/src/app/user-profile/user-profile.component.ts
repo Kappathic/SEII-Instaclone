@@ -35,7 +35,7 @@ export class UserProfileComponent implements OnInit {
         this.postCount = data.posts.length;
         this.followerCount = data.follower.length;
         this.profilePic = this.b64toImg.convert(data.profilePic);
-        this.snackBar.open('Loaded Profile Content!', 'close');
+        this.snackBar.open('Profile Content Loaded!', 'close');
         console.log(data);
       },
       (error) => {
@@ -61,7 +61,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  this.getProfilePosts();
+    this.getProfilePosts();
   }
-
 }
