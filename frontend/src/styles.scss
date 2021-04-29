@@ -291,13 +291,26 @@ a{
 
 // Global used classes
 .page-container{
-  padding-top: 50px;
   padding-bottom: 200px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   text-align: center;
   align-items: center;
+}
+.page-header{
+  display: flex;
+  width: 100%;
+  min-width: 1000px;
+  height: 200px;
+  background: #4A2FFF;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  word-break: break-word;
+  margin-bottom: 50px;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
 }
 .spacer{
   margin-left: 5%;
@@ -309,6 +322,13 @@ a{
 .big-heading{
   font-size: 8rem!important;
   line-height: 8rem!important;
-  font-weight: 300!important;
+  font-weight: 200!important;
   color: #F2F2F2;
 }
+.medium-heading{
+  font-size: 4rem!important;
+  line-height: 4rem!important;
+  font-weight: 200!important;
+  color: #F2F2F2;
+}
+

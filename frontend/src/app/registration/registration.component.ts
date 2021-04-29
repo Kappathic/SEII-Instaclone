@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SnackBarService} from '../snack-bar-service.service';
 import {HttpClient} from '@angular/common/http';
 import {ImageCroppedEvent} from "ngx-image-cropper";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -24,6 +25,7 @@ export class RegistrationComponent implements OnInit {
   bColor = '#56CCF2';
 
   constructor(
+    private router: Router,
     private http: HttpClient,
     private snackBar: SnackBarService) {
   }
@@ -41,21 +43,24 @@ export class RegistrationComponent implements OnInit {
         profilePic: this.picture.split(',')[1]
       }).subscribe(
         (data: any) => {
+            console.log('successfully registered!');
+            this.snackBar.open('Successfully registered!', 'close');
+            this.router.navigate(['login']);
         },
-        (error) => {
-          switch (error.status) {
-            case 200:
-              console.log('successfully registered!');
-              this.snackBar.open('Successfully registered!', 'close');
-              break;
-            case 400:
-              console.log('User already exists!');
-              this.snackBar.open('User already exists!', 'close');
-              break;
-            default:
-              console.log('Bad Request');
-              this.snackBar.open('Bad Request', 'close');
-              break;
+      (error) => {
+        switch (error.status) {
+          case 200:
+            console.log('successfully registered!');
+            this.snackBar.open('Successfully registered!', 'close');
+            break;
+          case 400:
+            console.log('User already exists!');
+            this.snackBar.open('User already exists!', 'close');
+            break;
+          default:
+            console.log('Bad Request');
+            this.snackBar.open('Bad Request', 'close');
+            break;
           }
         }
       );

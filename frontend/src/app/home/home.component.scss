@@ -8,8 +8,19 @@
 #welcome-header{
   position: relative;
   display: flex;
+  padding: 50px;
+  flex-direction: column;
   background: #4A2FFF;
-  height: 400px;
+  height: fit-content;
   text-align: center;
   align-items: center;
+}
+#button-holder{
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+}
+.home-button{
+  width: 100px;
 }
