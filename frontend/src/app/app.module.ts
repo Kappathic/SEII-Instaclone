@@ -43,7 +43,7 @@ import {ImageCropperModule} from 'ngx-image-cropper';
     PrivacyNoticeComponent,
     PostContainerComponent,
     AddPostComponent,
-    UserProfileComponent
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,

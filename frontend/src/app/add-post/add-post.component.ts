@@ -32,6 +32,7 @@ export class AddPostComponent implements OnInit {
        }).subscribe(
          (data: any) => {
            console.log('Post successful!');
+           this.router.navigate(['profile']);
            this.snackBar.open('Post successful!', 'close');
          },
          (error) => {
@@ -46,7 +47,6 @@ export class AddPostComponent implements OnInit {
                break;
            }
          }
-
        );
      } else {
        this.snackBar.open('No picture to post found!', 'close');

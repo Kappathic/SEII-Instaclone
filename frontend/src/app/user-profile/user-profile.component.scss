@@ -38,6 +38,21 @@ $profile-size: 1200px;
   font-size: 32px;
   font-weight: 100;
 }
+#userprofile-biography-container{
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  width: 100%;
+  height: fit-content;
+}
+#userprofile-biography{
+  width: 70%;
+  word-break: break-word;
+  color: #F2F2F2;
+  font-size: $profile-size/30;
+  line-height: $profile-size/30;
+}
 #userprofile-main-content{
   min-height: 600px;
   background: #393939;
@@ -57,11 +72,62 @@ $profile-size: 1200px;
   grid-row-gap: $profile-size/50;
 }
 .post-container{
+  position: relative;
   width: $profile-size/4;
   height: $profile-size/4;
-  box-shadow: 0 0 0px 1px #2A67FF;
+  box-shadow: 0 0 0px 3px #2A67FF;
 }
 .post-item{
+  display: block;
   width: $profile-size/4;
   height: $profile-size/4;
+  transition: .5s ease-out;
+}
+.post-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .5s ease;
+}
+.post-container:hover {
+  transition: .5s ease-out;
+  box-shadow: 0 0 0px 3px #56CCF2;
+  .post-overlay-text{
+    transition: .5s ease-out;
+    opacity: 1;
+  }
+  img {
+    transition: .5s ease-out;
+    filter: blur(2px) saturate(0) brightness(0.4);
+  }
+}
+.post-overlay-text{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  transition: .5s ease-out;
+  opacity: 0;
+  width: 75%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+#post-overlay-description{
+  color: white;
+  font-size: $profile-size/35;
+  line-height:  $profile-size/30;
+}
+#post-overlay-hashtags{
+  color: white;
+  font-size: $profile-size/50;
+  line-height:  $profile-size/50;
 }
