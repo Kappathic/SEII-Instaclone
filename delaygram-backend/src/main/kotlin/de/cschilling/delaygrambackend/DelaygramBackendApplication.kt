@@ -7,6 +7,7 @@ import de.cschilling.delaygrambackend.repository.UserRepository
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import java.util.*
 
 @SpringBootApplication
 class DelaygramBackendApplication(
@@ -25,7 +26,11 @@ class DelaygramBackendApplication(
             0,
             mutableSetOf()
         )
-        val post1 = Post("Das ist der erste Admin Post",null, mutableListOf(),setOf("test1","test2"))
+        val post1 = Post("Das ist der erste Admin Post",
+            null,Date(),
+            mutableListOf(),
+            mutableSetOf(),
+            setOf("test1","test2"))
         postRepository.save(post1)
         user1.posts.add(post1)
         userRepository.save(user1)
@@ -38,9 +43,22 @@ class DelaygramBackendApplication(
                 "user@example.com",
                 null,
                 mutableListOf(postRepository.save(Post("Das ist der erste User Post",
-                    null,
+                    null,Date(),
                     mutableListOf(),
-                setOf("test1","test2")))),
+                    mutableSetOf(),
+                setOf("test1","test2"))),
+                postRepository.save(Post("Das ist der zweite User Post",
+                    null,Date(),
+                    mutableListOf(),
+                    mutableSetOf(),
+                setOf("test1","test2"))),
+                postRepository.save(Post("Das ist der dritte User Post",
+                    null,Date(),
+                    mutableListOf(),
+                    mutableSetOf(),
+                setOf("test1","test2"))),
+
+                    ),
                 0,
                 mutableSetOf()
             )

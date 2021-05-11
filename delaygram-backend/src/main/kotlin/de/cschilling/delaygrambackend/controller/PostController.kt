@@ -41,4 +41,9 @@ class PostController(
     @PostMapping("/comment/{id}")
     fun addCommentToPost(@PathVariable id: Long,
                          @RequestBody comment: Comment) = postService.addCommentToPost(id, comment)
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/like/{id}")
+    fun likePost(@PathVariable id: Long) = postService.likePost(id)
+
 }

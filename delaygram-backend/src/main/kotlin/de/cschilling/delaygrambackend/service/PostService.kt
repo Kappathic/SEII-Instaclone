@@ -41,9 +41,18 @@ class PostService(
     }
 
     fun addCommentToPost(id: Long, comment: Comment): Post {
+        comment.userId = userService.getCurrentUser()
         val post = postRepository.findByIdOrNull(id)
             ?: throw NoSuchElementException("No matching Post found")
-        post.comments.add(comment)
+        post.comments?.add(comment)
+        return postRepository.save(post)
+    }
+
+    fun likePost(id: Long): Post {
+        val user = userService.getCurrentUser()
+        val post = postRepository.findByIdOrNull(id)
+            ?: throw NoSuchElementException("No matching Post found")
+        post.likesUserId?.add(user)
         return postRepository.save(post)
     }
 }
