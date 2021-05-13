@@ -8,7 +8,7 @@ import {LegalDisclosureComponent} from './legal-disclosure/legal-disclosure.comp
 import {PrivacyNoticeComponent} from './privacy-notice/privacy-notice.component';
 import {AuthGuardService} from './auth-guard.service';
 import {AddPostComponent} from './add-post/add-post.component';
-import {UserProfileComponent} from "./user-profile/user-profile.component";
+import {UserProfileComponent} from './user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -25,7 +25,8 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    component: UserProfileComponent
+    component: UserProfileComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'legal-disclosure',
@@ -34,11 +35,11 @@ const routes: Routes = [
   {
     path: 'privacy-notice',
     component: PrivacyNoticeComponent,
-    canActivate: [AuthGuardService]
   },
   {
     path: 'add-post',
-    component: AddPostComponent
+    component: AddPostComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: '',

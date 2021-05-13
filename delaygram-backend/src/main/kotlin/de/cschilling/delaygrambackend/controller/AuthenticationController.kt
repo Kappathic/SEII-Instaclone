@@ -3,6 +3,7 @@ package de.cschilling.delaygrambackend.controller
 import de.cschilling.delaygrambackend.model.User
 import de.cschilling.delaygrambackend.service.JwtUserDetailsService
 import de.cschilling.delaygrambackend.service.UserService
+import de.cschilling.delaygrambackend.security.SecurityConfig
 import org.slf4j.Logger
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.authentication.AuthenticationProvider
@@ -18,6 +19,7 @@ class AuthenticationController(
     private val userService: UserService,
     private val authenticationProvider: AuthenticationProvider,
     private val jwtUserDetailsService: JwtUserDetailsService,
+    private val securityConfig: SecurityConfig,
     val logger: Logger
 ) {
 
@@ -30,15 +32,18 @@ class AuthenticationController(
         logger.info(user.toString())
         response.setHeader(
             "Set-Cookie",
-            "JWT=Bearer ${jwtUserDetailsService.createToken(user)}; Secure; HttpOnly; SameSite=Strict;Max-Age=600;Path=/ "
+            "JWT=Bearer ${jwtUserDetailsService.createToken(user)}; Secure; HttpOnly; SameSite=Strict;Max-Age=60000;Path=/ "
         )
         return user
     }
 
     @PreAuthorize("permitAll()")
     @PostMapping("/register")
-    fun register(@RequestBody user: User) = userService.createUser(user)
+    fun register(@RequestBody user: User):User{
+        user.password = securityConfig.passwordEncoder().encode(user.password)
+        return userService.createUser(user)
 
+    }
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/logout")
     fun logout(response: HttpServletResponse, request: HttpServletRequest): String {

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {SnackBarService} from "../snack-bar-service.service";
-import {CookieService} from "ngx-cookie-service";
-import {Router} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
+import {SnackBarService} from '../snack-bar-service.service';
+import {Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -15,10 +14,9 @@ export class LoginComponent implements OnInit {
     username: any;
     password: any;
     constructor(
-    private router: Router,
-    private http: HttpClient,
-    private cookieService: CookieService,
-    private snackBar: SnackBarService) { }
+      private router: Router,
+      private http: HttpClient,
+      private snackBar: SnackBarService) { }
 
   // Sends login Request to login API endpoint via JSON file - password hashing is done on backend side
   // If Login is successful, a local Cookie is generated to start the User Session. (valid for 30 minutes)
@@ -35,7 +33,7 @@ export class LoginComponent implements OnInit {
         console.log('successfully Logged in!');
         this.snackBar.open('Successfully Logged In!', 'close');
         this.router.navigate(['home']);
-        localStorage.setItem('currentUser', data['username']);
+        localStorage.setItem('currentUser', data.username);
       },
       (error) => {
         switch (error.status) {

@@ -1,48 +1,27 @@
 <div id="userprofile-container">
   <mat-toolbar id="userprofile-header">
-    <img id="userprofile-profile-picture" src="https://source.unsplash.com/random/100x100">
+    <img id="userprofile-profile-picture" [src]="profilePic">
     <div id="userprofile-header-data">
-      <span id="userprofile-header-username">Kappathic</span>
+      <span id="userprofile-header-username">{{this.username}}</span>
       <div></div>
       <button mat-raised-button *ngIf="!isFollowed" (click)="isFollowed = !isFollowed" style="width: 50%"> Follow </button>
       <button mat-raised-button *ngIf="isFollowed" (click)="isFollowed = !isFollowed" style="background: #4A2FFF; width: 50%"> Unfollow </button>
-      <span class="userprofile-header-attr"> 17 posts</span>
-      <span class="userprofile-header-attr"> 1.684 follower</span>
-      <span class="userprofile-header-attr"> 45 subscriptions</span>
+      <span class="userprofile-header-attr"> {{this.postCount}} posts</span>
+      <span class="userprofile-header-attr"> {{this.followerCount}} follower</span>
     </div>
   </mat-toolbar>
+  <div id="userprofile-biography-container">
+    <span id="userprofile-biography" >{{biography}}</span>
+  </div>
   <div id="userprofile-main-content">
     <div class="spacer" ></div>
     <div id="userprofile-main-posts">
-      <div class="dummy">
-        <img class="dummy-pic" src="https://source.unsplash.com/random/300x300">
-      </div>
-      <div class="dummy">
-        <img class="dummy-pic" src="https://source.unsplash.com/random/300x300">
-      </div>
-      <div class="dummy">
-        <img class="dummy-pic" src="https://source.unsplash.com/random/300x300">
-      </div>
-      <div class="dummy">
-        <img class="dummy-pic" src="https://source.unsplash.com/random/300x300">
-      </div>
-      <div class="dummy">
-        <img class="dummy-pic" src="https://source.unsplash.com/random/300x300">
-      </div>
-      <div class="dummy">
-        <img class="dummy-pic" src="https://source.unsplash.com/random/300x300">
-      </div>
-      <div class="dummy">
-        <img class="dummy-pic" src="https://source.unsplash.com/random/300x300">
-      </div>
-      <div class="dummy">
-        <img class="dummy-pic" src="https://source.unsplash.com/random/300x300">
-      </div>
-      <div class="dummy">
-        <img class="dummy-pic" src="https://source.unsplash.com/random/300x300">
-      </div>
-      <div class="dummy">
-        <img class="dummy-pic" src="https://source.unsplash.com/random/300x300">
+      <div class="post-container" *ngFor="let post of this.userPosts">
+        <img class="post-item" [src]="convertPostItem(post.image)" alt="a Picture on the User's profile.">
+          <div class="post-overlay-text">
+            <div id="post-overlay-description">{{post.description}}</div>
+            <div id="post-overlay-hashtags" *ngFor="let tag of post.hashtags">{{tag}}</div>
+          </div>
       </div>
     </div>
   </div>

@@ -1,7 +1,20 @@
-  <app-post-container></app-post-container>
-  <app-post-container></app-post-container>
-  <app-post-container></app-post-container>
-  <app-post-container></app-post-container>
-  <app-post-container></app-post-container>
-  <app-post-container></app-post-container>
-  <app-post-container></app-post-container>
+  <app-post-container
+  *ngFor="let post of mainFeedPosts"
+  [username]="post.username"
+  [image]="post.image"
+  [description]="post.description"
+  [hashtags]="post.hashtags"
+  ></app-post-container>
+<div class="home-container" *ngIf="!isLoggedIn()">
+  <div id="welcome-header">
+    <h1 class="big-heading">Welcome to</h1>
+    <div style=" display: flex; align-items: center; width: 100%; justify-content: center; margin: 30px">
+      <img src="assets/navbar_title.svg" alt="DELAYGRAM" style="width: 40%">
+    </div>
+    <h2 class="medium-heading">In order to use our platform, please Login or Register first!</h2>
+    <div id="button-holder">
+      <button mat-raised-button class="home-button" routerLink="/login" routerLinkActive="active">    Login</button>
+      <button mat-raised-button class="home-button" routerLink="/register" routerLinkActive="active"> Register</button>
+    </div>
+  </div>
+</div>

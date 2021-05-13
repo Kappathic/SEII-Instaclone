@@ -1,6 +1,25 @@
 <div class="page-container">
+  <div class="page-header">
+    <h1 class="big-heading">Registration</h1>
+  </div>
   <div class="register-container">
-
+    <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="1 / 1"
+      [resizeToHeight]="800"
+      [resizeToWidth]="800"
+      [cropperMinWidth]="200"
+      [cropperMinHeight]="200"
+      [backgroundColor]="bColor"
+      format="jpeg"
+      (imageCropped)="imageCropped($event)"
+      (loadImageFailed)="loadImageFailed()"
+      *ngIf="picture"
+    ></image-cropper>
+    <img *ngIf="picture" [src]="picture" id="cropped-image"/>
+    <input type="file" accept="image/*"  (change)="fileChangeEvent($event)" id="styledUpload" hidden/>
+    <button mat-raised-button style="margin-bottom: 20px; margin-top: 20px;"><label for="styledUpload" style="cursor:pointer; height: 100%; width: 100%;">Datei auswählen</label></button>
     <mat-form-field appearance="fill" class="form-container">
       <mat-label>Username</mat-label>
       <label>
@@ -8,24 +27,10 @@
       </label>
     </mat-form-field>
 
-<!--    <mat-form-field appearance="fill" class="form-container">-->
-<!--      <mat-label>Vorname</mat-label>-->
-<!--      <label>-->
-<!--        <input matInput placeholder="Dein Vorname" [(ngModel)]="prename">-->
-<!--      </label>-->
-<!--    </mat-form-field>-->
-
-<!--    <mat-form-field appearance="fill" class="form-container">-->
-<!--      <mat-label>Nachname</mat-label>-->
-<!--      <label>-->
-<!--        <input matInput type="text" placeholder="Dein Nachname" [(ngModel)]="name">-->
-<!--      </label>-->
-<!--    </mat-form-field>-->
-
     <mat-form-field appearance="fill" class="form-container">
       <mat-label>E-Mail</mat-label>
       <label>
-        <input matInput type="text" placeholder="Deine Mailadresse" [(ngModel)]="mail">
+        <input matInput type="text" placeholder="Deine Mailadresse" [(ngModel)]="email">
       </label>
     </mat-form-field>
 
@@ -56,16 +61,6 @@
         <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
       </button>
     </mat-form-field>
-
-    <label for="singleFile" class="form-container">Upload file</label>
-    <input id="singleFile" type="file" accept="image/*" [(ngModel)]="picture" class="form-container"/>
-<!--    <mat-file-upload-queue #fileUploadQueue
-                           [fileAlias]="'file'"
-                           [httpUrl]="'http://localhost:8180/jax-rs-jersey-application-sample'">
-
-      <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index"></mat-file-upload>
-    </mat-file-upload-queue>-->
-
     <button mat-raised-button class="register-button" (click)="registerUser()">Register</button>
   </div>
 </div>

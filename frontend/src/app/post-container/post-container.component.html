@@ -3,7 +3,7 @@
     <mat-toolbar id="post-header-toolbar">
       <a href="/profile/{{username}}" style="margin: 0;">
         <div id="post-profile-picture-container">
-          <img src="https://source.unsplash.com/random/100x100" id="post-profile-picture">
+          <img src="assets/Bild2.png" id="post-profile-picture">
         </div>
       </a>
       <a id="post-username" href="/profile/{{username}}">Kappathic</a>
@@ -18,13 +18,17 @@
     </mat-toolbar>
   </div>
   <div id="post-content" (dblclick)="isLiked = !isLiked">
-    <img src="https://source.unsplash.com/random/800x800" style="width: 800px; height: 800px;">
+    <img [src]="postImage" style="width: 800px; height: 800px;">
   </div>
   <div id="post-footer">
     <mat-toolbar id="post-footer-toolbar">
       <mat-icon aria-label="Like-Post" *ngIf="isLiked" (click)="isLiked = !isLiked" color="primary">favorite</mat-icon>
       <mat-icon aria-label="Like-Post" *ngIf="!isLiked" (click)="isLiked = !isLiked" color="primary">favorite_border</mat-icon>
       <mat-icon aria-label="Like-Post" color="primary" >question_answer</mat-icon>
+      <div>
+        <span style="color: #2A67FF;">{{postDescription}}</span>
+        <span *ngFor="let hashtag of hashtags" style="color: #56CCF2; font-size: 1.2rem;">{{hashtag}}</span>
+      </div>
     </mat-toolbar>
   </div>
   <div id="post-comment-section">
