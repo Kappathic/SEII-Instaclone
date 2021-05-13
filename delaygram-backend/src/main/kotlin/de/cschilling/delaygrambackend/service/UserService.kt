@@ -42,7 +42,7 @@ class UserService(
     fun getFollower(id: Long): Set<User> {
         val user = userRepository.findByIdOrNull(id)
             ?: throw NoSuchElementException("No User found with matching id")
-        return user.follower
+        return user.followerUserId
     }
 
     fun followUser(id: Long): User {
@@ -52,12 +52,24 @@ class UserService(
         if (user.id == userToFollow.id) {
             throw IllegalArgumentException("You can't follow yourself")
         }
-        userToFollow.follower.add(user)
+        userToFollow.followerUserId.add(user)
         userRepository.save(userToFollow)
-        return user
+        return userToFollow
     }
 
     fun getUserByUsername(username: String) = userRepository.findByUsername(username)
+
+    fun unfollowUser(id: Long): Any {
+        val user = getCurrentUser()
+        val userToFollow = userRepository.findByIdOrNull(id)
+            ?: throw NoSuchElementException("No User found with matching id")
+        if (user.id == userToFollow.id) {
+            throw IllegalArgumentException("You can't unfollow yourself")
+        }
+        userToFollow.followerUserId.remove(user)
+        userRepository.save(userToFollow)
+        return userToFollow
+    }
 
 }
 

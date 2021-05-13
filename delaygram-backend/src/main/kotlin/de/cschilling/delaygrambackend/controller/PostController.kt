@@ -1,5 +1,6 @@
 package de.cschilling.delaygrambackend.controller
 
+import de.cschilling.delaygrambackend.model.Comment
 import de.cschilling.delaygrambackend.model.Post
 import de.cschilling.delaygrambackend.repository.PostRepository
 import de.cschilling.delaygrambackend.service.PostService
@@ -35,4 +36,14 @@ class PostController(
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/feed")
     fun getFeedPosts() = postService.getFeedPosts()
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/comment/{id}")
+    fun addCommentToPost(@PathVariable id: Long,
+                         @RequestBody comment: Comment) = postService.addCommentToPost(id, comment)
+
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/like/{id}")
+    fun likePost(@PathVariable id: Long) = postService.likePost(id)
+
 }
