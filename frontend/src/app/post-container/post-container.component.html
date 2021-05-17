@@ -22,8 +22,8 @@
   </div>
   <div id="post-footer">
     <mat-toolbar id="post-footer-toolbar">
-      <mat-icon aria-label="Like-Post" *ngIf="isLiked" (click)="isLiked = !isLiked" color="primary">favorite</mat-icon>
-      <mat-icon aria-label="Like-Post" *ngIf="!isLiked" (click)="isLiked = !isLiked" color="primary">favorite_border</mat-icon>
+      <mat-icon aria-label="Like-Post" *ngIf="isLiked" (click)="changeLike()" color="primary">favorite</mat-icon>
+      <mat-icon aria-label="Like-Post" *ngIf="!isLiked" (click)="changeLike()" color="primary">favorite_border</mat-icon>
       <mat-icon aria-label="Like-Post" color="primary" >question_answer</mat-icon>
       <div>
         <span style="color: #2A67FF;">{{postDescription}}</span>
@@ -32,9 +32,12 @@
     </mat-toolbar>
   </div>
   <div id="post-comment-section">
+    <div>
+      <span *ngFor="let comment of comments" style="color: #56CCF2; font-size: 1.2rem;">{{comment}}</span>
+    </div>
     <mat-form-field id="post-comment-section-add">
       <mat-label>Leave a comment</mat-label>
-      <input matInput placeholder="I really like your post!">
+      <input matInput placeholder="I really like your post!" [(ngModel)]="newComment" (keydown.enter)="saveComment()">
     </mat-form-field>
   </div>
 </div>

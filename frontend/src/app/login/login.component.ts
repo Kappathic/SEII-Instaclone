@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
         this.snackBar.open('Successfully Logged In!', 'close');
         this.router.navigate(['home']);
         localStorage.setItem('currentUser', data.username);
+        localStorage.setItem('currentUserID', data.id);
       },
       (error) => {
         switch (error.status) {
