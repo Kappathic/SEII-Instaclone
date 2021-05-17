@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {SnackBarService} from '../snack-bar-service.service';
 import { B64toImgService } from '../b64to-img.service';
+import {HttpClient} from '@angular/common/http';
 import has = Reflect.has;
 
 @Component({
@@ -14,10 +15,14 @@ export class PostContainerComponent implements OnInit {
   @Input('image') postImageB64: any;
   @Input('description') postDescription: any;
   @Input('hashtags') hashtags: any;
+  @Input('comments') comments: any; // TODO check JSON file for correct name
+  @Input('id') postId: any; // TODO add on every instance of post container
+  newComment: any;
   postImage: any;
   constructor(
     private snackBar: SnackBarService,
-    private B64toImg: B64toImgService
+    private B64toImg: B64toImgService,
+    private http: HttpClient
   ) {}
   isActive = true;
   isLiked = false;
@@ -28,5 +33,65 @@ export class PostContainerComponent implements OnInit {
         this.hashtags[tag] = '   #' + this.hashtags[tag];
       }
     }
+  }
+  changeLike(): void {
+    if (this.isLiked){
+      const requestUrl = 'api/post/like/' + this.postId.toString();
+      this.http.post(requestUrl, {
+      }).subscribe(
+        (data: any) => {
+          console.log('like successful');
+          this.snackBar.open('Successfully liked!', 'close');
+          this.newComment = null;
+        },
+        (error) => {
+          switch (error.status) {
+            case 200:
+              console.log('liked successful');
+              this.snackBar.open('Successfully liked!', 'close');
+              this.isLiked = false;
+              break;
+            default:
+              console.log('Bad Request');
+              this.snackBar.open('Bad Request', 'close');
+              break;
+          }
+        }
+      );
+    }
+    else{
+      this.isLiked = true;
+      // would like to implement but backend ain't capable of offering a method to revoke likes on posts
+    }
+  }
+  saveComment(): void {
+      if (this.newComment) {
+      const requestUrl = 'api/post/comment/' + this.postId.toString();
+      this.http.post(requestUrl, {
+        text: this.newComment,
+        userId: localStorage.getItem('currentUserID')
+      }).subscribe(
+        (data: any) => {
+          console.log('comment successful');
+          this.snackBar.open('Successfully commented!', 'close');
+          this.newComment = null;
+        },
+        (error) => {
+          switch (error.status) {
+            case 200:
+              console.log('comment successful');
+              this.snackBar.open('Successfully commented!', 'close');
+              break;
+            default:
+              console.log('Bad Request');
+              this.snackBar.open('Bad Request', 'close');
+              break;
+          }
+        }
+      );
+    } else {
+      this.snackBar.open('No comment written', 'close');
+    }
+
   }
 }
