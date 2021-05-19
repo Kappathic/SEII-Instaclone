@@ -35,7 +35,7 @@ export class PostContainerComponent implements OnInit {
     }
   }
   changeLike(): void {
-    if (this.isLiked){
+    if (!this.isLiked){
       const requestUrl = 'api/post/like/' + this.postId.toString();
       this.http.post(requestUrl, {
       }).subscribe(
@@ -60,7 +60,28 @@ export class PostContainerComponent implements OnInit {
       );
     }
     else{
-      this.isLiked = true;
+      const requestUrl = 'api/post/revokelike/' + this.postId.toString();
+      this.http.post(requestUrl, {
+      }).subscribe(
+        (data: any) => {
+          console.log('like revoked successful');
+          this.snackBar.open('Successfully revoked liked!', 'close');
+          this.newComment = null;
+        },
+        (error) => {
+          switch (error.status) {
+            case 200:
+              console.log('revoked liked successful');
+              this.snackBar.open('Successfully revoked liked!', 'close');
+              this.isLiked = false;
+              break;
+            default:
+              console.log('Bad Request');
+              this.snackBar.open('Bad Request', 'close');
+              break;
+          }
+        }
+      );
       // would like to implement but backend ain't capable of offering a method to revoke likes on posts
     }
   }
