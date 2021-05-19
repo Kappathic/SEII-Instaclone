@@ -13,6 +13,8 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
   isFollowed = false;
+  ownProfile = false;
+  userId: any;
   username: any;
   biography: any;
   profilePic: any;
@@ -31,6 +33,8 @@ export class UserProfileComponent implements OnInit {
 
     this.http.get(requestUrl, {}).subscribe(
       (data: any) => {
+        if (data.username === localStorage.getItem('currentUser')) { this.ownProfile = true; }
+        this.userId = data.id;
         this.username = data.username;
         this.biography = data.description;
         this.userPosts = data.posts;
@@ -57,6 +61,53 @@ export class UserProfileComponent implements OnInit {
       }
     );
   }
+  followUser(profileId: string): void{
+    const requestUrl = 'api/user/follow/' + profileId;
+    this.http.post(requestUrl, {
+    }).subscribe(
+      (data: any) => {
+        console.log('You followed' + this.username + '!');
+        this.isFollowed = true;
+        this.followerCount ++;
+        },
+      (error) => {
+        switch (error.status) {
+          case 400:
+            console.log('Something went wrong whilst following the desired user.');
+            this.snackBar.open('Something went wrong whilst following the desired user.', 'close');
+            break;
+          default:
+            console.log('Bad Request');
+            this.snackBar.open('Bad Request', 'close');
+            break;
+        }
+      }
+    );
+  }
+  unfollowUser(profileId: string): void{
+    const requestUrl = 'api/user/unfollow/' + profileId;
+    this.http.post(requestUrl, {
+    }).subscribe(
+      (data: any) => {
+        console.log('You unfollowed' + this.username + '!');
+        this.isFollowed = false;
+        this.followerCount --;
+      },
+      (error) => {
+        switch (error.status) {
+          case 400:
+            console.log('Something went wrong whilst unfollowing the desired user.');
+            this.snackBar.open('Something went wrong whilst unfollowing the desired user.', 'close');
+            break;
+          default:
+            console.log('Bad Request');
+            this.snackBar.open('Bad Request', 'close');
+            break;
+        }
+      }
+    );
+  }
+
   convertPostItem(postData: any): SafeResourceUrl{
     return this.b64toImg.convert(postData);
   }
