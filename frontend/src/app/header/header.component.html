@@ -23,14 +23,14 @@
       Login
     </button>
   </div>
-  <div class="searchBar">
+  <div class="searchBar" *ngIf="isLoggedIn">
     <div id="searchBox">
       <button mat-icon-button (click)="submitSearch()">
       <mat-icon style="color: white">{{'search'}}</mat-icon>
       </button>
       <mat-form-field>
         <mat-label>Search for Users</mat-label>
-        <input type="text" matInput placeholder="Search a user..." [(ngModel)]="searchToken" (keyup.enter)="submitSearch()">
+        <input type="text" matInput placeholder="Search a user..." [(ngModel)]="searchToken" (ngModelChange)="submitSearch()">
       </mat-form-field>
     </div>
     <mat-nav-list *ngIf="this.filteredUsers.length > 0" id="searchBar-results-list">

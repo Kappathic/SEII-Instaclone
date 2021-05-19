@@ -26,19 +26,18 @@ export class UserProfileComponent implements OnInit {
     private http: HttpClient,
     private snackBar: SnackBarService,
     private b64toImg: B64toImgService ) { }
-  getProfilePosts(const username: string): void{
-    let requestUrl = 'api/user/profile';
-    requestUrl = requestUrl + '/' + this.username;
+  getProfilePosts(username: string): void{
+    const requestUrl = 'api/user/profile/' + username;
+
     this.http.get(requestUrl, {}).subscribe(
       (data: any) => {
         this.username = data.username;
         this.biography = data.description;
         this.userPosts = data.posts;
         this.postCount = data.posts.length;
-        this.followerCount = data.follower.length;
         this.profilePic = this.b64toImg.convert(data.profilePic);
+        this.followerCount = data.followerUserId.length;
         this.snackBar.open('Profile Content Loaded!', 'close');
-        console.log(data);
       },
       (error) => {
         switch (error.status) {
@@ -64,7 +63,7 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.username = params['id'];
+      this.username = params.id;
     });
     this.getProfilePosts(this.username);
   }

@@ -13,15 +13,7 @@ export class HeaderComponent implements DoCheck{
   isLoggedIn = false;
   currentUserName: any;
   searchToken: any;
-  searchResults: any;
-  filteredUsers = [{
-    username : 'Kappathic',
-    profilePic : ''
-  }, {
-    username: 'Niklas',
-    profilePic: '',
-  }
-  ];
+  filteredUsers = [];
 
   constructor(
     private snackBar: SnackBarService,
@@ -52,11 +44,12 @@ export class HeaderComponent implements DoCheck{
     );
   }
   submitSearch(): void{
+    if (!this.searchToken) {return; }
     const requestUrl = 'api/user';
     this.http.get(requestUrl, {
     }).subscribe(
       (data: any) => {
-        this.filterUsers(data.body);
+        this.filterUsers(data);
       },
       (error) => {
         switch (error.status) {
@@ -79,7 +72,7 @@ export class HeaderComponent implements DoCheck{
   filterUsers(allUsers: any): void {
     this.filteredUsers = [];
     for (const user of allUsers) {
-      if (this.searchToken.includes(user) && this.filteredUsers.length < 8) {
+      if (user.username.toLowerCase().includes(this.searchToken.toLowerCase()) && this.filteredUsers.length < 8) {
         // @ts-ignore
         this.filteredUsers.push(user);
       }
