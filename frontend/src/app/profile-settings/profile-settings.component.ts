@@ -64,6 +64,7 @@ export class ProfileSettingsComponent implements OnInit {
 
   changeProfilePic(): void {
     if (!(localStorage.getItem('currentUser') !== this.username)){ this.router.navigate(['home']); return; }
+    if (!this.picture){ this.snackBar.open('Please choose a picture to change!', 'Close'); return; }
     const requestUrl = 'api/user/updateProfilePic';
     this.http.post(requestUrl, {
       picture: this.picture.split(',')[1]
