@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 })
 export class HeaderComponent implements DoCheck{
   isLoggedIn = false;
+  currentUserName: any;
   constructor(
     private snackBar: SnackBarService,
     private http: HttpClient,
@@ -43,6 +44,7 @@ export class HeaderComponent implements DoCheck{
     this.router.onSameUrlNavigation = 'reload';
     if (localStorage.getItem('currentUser')){
       this.isLoggedIn = true;
+      this.currentUserName = localStorage.getItem('currentUser');
     }
   }
 
