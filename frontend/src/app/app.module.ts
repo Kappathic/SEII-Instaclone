@@ -58,7 +58,8 @@ import {ImageCropperModule} from 'ngx-image-cropper';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    ImageCropperModule
+    ImageCropperModule,
+    MatListModule,
   ],
   providers: [
     SnackBarService
