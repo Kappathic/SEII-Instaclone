@@ -26,7 +26,7 @@ export class UserProfileComponent implements OnInit {
     private http: HttpClient,
     private snackBar: SnackBarService,
     private b64toImg: B64toImgService ) { }
-  getProfilePosts(): void{
+  getProfilePosts(const username: string): void{
     let requestUrl = 'api/user/profile';
     requestUrl = requestUrl + '/' + this.username;
     this.http.get(requestUrl, {}).subscribe(
@@ -66,6 +66,6 @@ export class UserProfileComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.username = params['id'];
     });
-    this.getProfilePosts();
+    this.getProfilePosts(this.username);
   }
 }
