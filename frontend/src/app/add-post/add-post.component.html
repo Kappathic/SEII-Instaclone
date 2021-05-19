@@ -1,35 +1,37 @@
-<div class="post-container">
+<div class="page-container">
   <div class="page-header">
-    <h1 class="big-heading">Login</h1>
+    <h1 class="big-heading">add-post</h1>
   </div>
-  <image-cropper
-    [imageChangedEvent]="imageChangedEvent"
-    [maintainAspectRatio]="true"
-    [aspectRatio]="1 / 1"
-    [resizeToHeight]="800"
-    [resizeToWidth]="800"
-    [cropperMinWidth]="200"
-    [cropperMinHeight]="200"
-    [backgroundColor]="bColor"
-    format="jpeg"
-    (imageCropped)="imageCropped($event)"
-    (loadImageFailed)="loadImageFailed()"
-    *ngIf="picture"
-  ></image-cropper>
-  <img *ngIf="picture" [src]="picture" id="cropped-image"/>
-  <input type="file" accept="image/*"  (change)="fileChangeEvent($event)" id="styledUpload" hidden/>
-  <button mat-raised-button style="margin-bottom: 20px; margin-top: 20px;"><label for="styledUpload" style="cursor:pointer; height: 100%; width: 100%;">Datei auswählen</label></button>
-  <mat-form-field appearance="fill" class="form-container">
-    <mat-label>Bildbeschreibung</mat-label>
-    <label>
-      <input matInput placeholder="Bildbeschreibung" [(ngModel)]="description">
-    </label>
-  </mat-form-field>
-  <mat-form-field appearance="fill" class="form-container">
-    <mat-label>Hashtag</mat-label>
-    <label>
-      <input matInput placeholder="Hashtag" [(ngModel)]="hashtags">
-    </label>
-  </mat-form-field>
-  <button *ngIf="picture" mat-raised-button  (click)="addPost()">Post</button>
+  <div class="post-container">
+    <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="1 / 1"
+      [resizeToHeight]="800"
+      [resizeToWidth]="800"
+      [cropperMinWidth]="200"
+      [cropperMinHeight]="200"
+      [backgroundColor]="bColor"
+      format="jpeg"
+      (imageCropped)="imageCropped($event)"
+      (loadImageFailed)="loadImageFailed()"
+      *ngIf="picture"
+    ></image-cropper>
+    <img *ngIf="picture" [src]="picture" id="cropped-image"/>
+    <input type="file" accept="image/*"  (change)="fileChangeEvent($event)" id="styledUpload" hidden/>
+    <button mat-raised-button style="margin-bottom: 20px; margin-top: 20px;"><label for="styledUpload" style="cursor:pointer; height: 100%; width: 100%;">Datei auswählen</label></button>
+    <mat-form-field appearance="fill" class="form-container">
+      <mat-label>Bildbeschreibung</mat-label>
+      <label>
+        <input matInput placeholder="Bildbeschreibung" [(ngModel)]="description">
+      </label>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-container">
+      <mat-label>Hashtag</mat-label>
+      <label>
+        <input matInput placeholder="Hashtag" [(ngModel)]="hashtags">
+      </label>
+    </mat-form-field>
+    <button *ngIf="picture" mat-raised-button  (click)="addPost()">Post</button>
+  </div>
 </div>
