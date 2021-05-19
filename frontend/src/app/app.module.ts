@@ -29,6 +29,7 @@ import {FormsModule} from '@angular/forms';
 import { PostContainerComponent } from './post-container/post-container.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import {ImageCropperModule} from 'ngx-image-cropper';
+import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {ImageCropperModule} from 'ngx-image-cropper';
     PostContainerComponent,
     AddPostComponent,
     UserProfileComponent,
+    ProfileSettingsComponent,
   ],
   imports: [
     BrowserModule,

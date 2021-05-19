@@ -1,0 +1,21 @@
+.settings-container{
+  width: 600px;
+  padding: 50px;
+  background: #2a67ff;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  --cropper-overlay-color: #56CCF2;
+}
+
+#cropped-image{
+  margin-top: 20px;
+  width: 60%;
+  height: 60%;
+  box-shadow: 0 0 0px 1px #56CCF2;
+}
+.form-container{
+  width: 270px;
+  margin: auto;
+}
