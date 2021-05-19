@@ -4,6 +4,8 @@ $post-width: 800px;
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
+  overflow: hidden;
+  max-height: $post-width*2;
   box-shadow:
     0 0 0 6px #2A67FF,
     0 0 25px 12px #393939;
@@ -99,4 +101,25 @@ $post-width: 800px;
   border-bottom-right-radius: 2rem;
   color: #F2F2F2;
   font-size: 18px;
+}
+#post-comment-items{
+  background: #393939;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 40% 40%;
+  grid-column-gap: 10%;
+}
+.post-comment-item{
+  text-align: left;
+  max-height: 100px;
+}
+.post-comment-username{
+  margin: 0;
+  text-align: left;
+  font-size: 1em;
+  color: #2a67ff;
+}
+.post-comment-content{
+  max-width: ($post-width/100) * 40;
+  font-size: 0.8em;
 }

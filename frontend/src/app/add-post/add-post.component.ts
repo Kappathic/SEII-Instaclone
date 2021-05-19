@@ -32,7 +32,7 @@ export class AddPostComponent implements OnInit {
        }).subscribe(
          (data: any) => {
            console.log('Post successful!');
-           this.router.navigate(['profile']);
+           this.router.navigate(['profile/' + localStorage.getItem('currentUser')]);
            this.snackBar.open('Post successful!', 'close');
          },
          (error) => {

@@ -1,9 +1,6 @@
   <app-post-container
   *ngFor="let post of mainFeedPosts"
-  [username]="post.username"
-  [image]="post.image"
-  [description]="post.description"
-  [hashtags]="post.hashtags"
+  [post]="post"
   ></app-post-container>
 <div class="home-container" *ngIf="!isLoggedIn()">
   <div id="welcome-header">

@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {SnackBarService} from '../snack-bar-service.service';
 import { B64toImgService } from '../b64to-img.service';
-import {HttpClient} from '@angular/common/http';
-import has = Reflect.has;
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-post-container',
@@ -11,29 +10,25 @@ import has = Reflect.has;
 })
 export class PostContainerComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
-  @Input('username') username: any | 'Kappathic';
-  @Input('image') postImageB64: any;
-  @Input('description') postDescription: any;
-  @Input('hashtags') hashtags: any;
-  @Input('comments') comments: any; // TODO check JSON file for correct name
-  @Input('id') postId: any; // TODO add on every instance of post container
+  @Input('post') post: any;
+  //
   newComment: any;
   postImage: any;
+  isActive = true;
+  isLiked = false;
+  showComments = false;
+  private postImageB64: any;
+  public postDescription: any;
+  public hashtags: any;
+  public comments: any;
+  public likeCount: any;
+  public username: any;
+  private postId: any;
   constructor(
     private snackBar: SnackBarService,
     private B64toImg: B64toImgService,
     private http: HttpClient
   ) {}
-  isActive = true;
-  isLiked = false;
-  ngOnInit(): void {
-    this.postImage = this.B64toImg.convert(this.postImageB64);
-    for (let tag = 0; tag < this.hashtags.length; tag++){
-      if (this.hashtags[tag][0] !== '#'){
-        this.hashtags[tag] = '   #' + this.hashtags[tag];
-      }
-    }
-  }
   changeLike(): void {
     if (!this.isLiked){
       const requestUrl = 'api/post/like/' + this.postId.toString();
@@ -86,14 +81,16 @@ export class PostContainerComponent implements OnInit {
     }
   }
   saveComment(): void {
-      if (this.newComment) {
+      if (!this.newComment) { this.snackBar.open('No comment written', 'close'); return; }
       const requestUrl = 'api/post/comment/' + this.postId.toString();
       this.http.post(requestUrl, {
         text: this.newComment,
-        userId: localStorage.getItem('currentUserID')
+        id: localStorage.getItem('currentUserID')
       }).subscribe(
         (data: any) => {
           console.log('comment successful');
+          console.log(data.comments);
+          this.comments = this.addCommentsUserName(data.comments);
           this.snackBar.open('Successfully commented!', 'close');
           this.newComment = null;
         },
@@ -110,9 +107,36 @@ export class PostContainerComponent implements OnInit {
           }
         }
       );
-    } else {
-      this.snackBar.open('No comment written', 'close');
+  }
+  addCommentsUserName(comments: any): any{
+    console.log(comments);
+    if (comments.length === 0) { return comments; }
+    for (let i  = 0; i < comments.length; i++ ) {
+      const requestUrl = 'api/user/' + comments[i].userId;
+      console.log(requestUrl);
+      this.http.get(requestUrl, {}).subscribe(
+        (data: any) => {
+          comments[i].username = data.username;
+        },
+        (error) => {
+          comments[i].username = 'notFound';
+        }
+      );
     }
-
+    return comments;
+  }
+  ngOnInit(): void {
+    this.postImageB64 = this.post.image;
+    this.postDescription = this.post.description;
+    this.hashtags = this.post.hashtags;
+    this.comments = this.addCommentsUserName(this.post.comments);
+    this.likeCount = this.post.likesUserId.length;
+    this.postId = this.post.id;
+    this.postImage = this.B64toImg.convert(this.postImageB64);
+    for (let tag = 0; tag < this.hashtags.length; tag++){
+      if (this.hashtags[tag][0] !== '#'){
+        this.hashtags[tag] = '   #' + this.hashtags[tag];
+      }
+    }
   }
 }

@@ -24,27 +24,22 @@ export class HeaderComponent implements DoCheck{
 
   submitLogout(): void {
     const requestUrl = 'api/auth/logout';
-    localStorage.removeItem('currentUser');
-    this.isLoggedIn = false;
     this.http.post(requestUrl, {
     }).subscribe(
       (data: any) => {
-        if (data) {
-          console.log(data);
-          console.log('successfully Logged out!');
-          this.snackBar.open('Successfully Logged Out!', 'Close');
-          this.router.navigate(['home']);
-        }else{
-          this.snackBar.open('Something went wrong!', 'Close');
-        }
+        console.log('successfully Logged out!');
+        this.snackBar.open('Successfully Logged Out!', 'Close');
+        localStorage.removeItem('currentUser');
+        this.isLoggedIn = false;
+        this.router.navigate(['login']);
       },
       (error) => {
-          this.snackBar.open('Something went wrong!', 'Close');
+        this.snackBar.open('Something went wrong!', 'Close');
       }
     );
   }
   submitSearch(): void{
-    if (!this.searchToken) {return; }
+    if (!this.searchToken || this.searchToken.trim() === '') {this.filteredUsers = []; return;  }
     const requestUrl = 'api/user';
     this.http.get(requestUrl, {
     }).subscribe(
