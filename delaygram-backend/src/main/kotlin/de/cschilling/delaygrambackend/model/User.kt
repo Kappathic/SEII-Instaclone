@@ -16,7 +16,7 @@ class User(
     var email: String?,
     @Lob
     var profilePic: ByteArray?,
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     var posts: MutableList<Post> = mutableListOf(),
     @Formula(
         """SELECT COUNT(P.USER_ID) 

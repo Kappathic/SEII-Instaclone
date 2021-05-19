@@ -2,7 +2,6 @@ package de.cschilling.delaygrambackend.service
 
 import de.cschilling.delaygrambackend.model.Comment
 import de.cschilling.delaygrambackend.model.Post
-import de.cschilling.delaygrambackend.model.User
 import de.cschilling.delaygrambackend.repository.PostRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
@@ -14,10 +13,8 @@ class PostService(
     val userService: UserService
 ) {
     fun createPost(post: Post): Post {
+        post.user = userService.getCurrentUser()
         val savedPost = postRepository.save(post)
-        val user = userService.getCurrentUser()
-        user.posts.add(savedPost)
-        userService.update(user)
         return savedPost
     }
         fun update(post: Post) = postRepository.findByIdOrNull(post.id)
@@ -37,6 +34,7 @@ class PostService(
         val posts = mutableListOf<Post>()
         val user = userService.getCurrentUser()
         posts.addAll(user.follows.flatMap {followUser -> followUser.posts })
+        posts.addAll(user.posts)
         return posts
     }
 
@@ -53,6 +51,14 @@ class PostService(
         val post = postRepository.findByIdOrNull(id)
             ?: throw NoSuchElementException("No matching Post found")
         post.likesUserId?.add(user)
+        return postRepository.save(post)
+    }
+
+    fun revokeLikePost(id: Long): Post {
+        val user = userService.getCurrentUser()
+        val post = postRepository.findByIdOrNull(id)
+            ?: throw NoSuchElementException("No matching Post found")
+        post.likesUserId?.remove(user)
         return postRepository.save(post)
     }
 }

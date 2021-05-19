@@ -13,6 +13,16 @@ import org.springframework.web.bind.annotation.*
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
+/**
+ * Authentication controller
+ *
+ * @property userService
+ * @property authenticationProvider
+ * @property jwtUserDetailsService
+ * @property securityConfig
+ * @property logger
+ * @constructor Create empty Authentication controller
+ */
 @RestController
 @RequestMapping("api/auth")
 class AuthenticationController(
@@ -22,7 +32,13 @@ class AuthenticationController(
     private val securityConfig: SecurityConfig,
     val logger: Logger
 ) {
-
+    /**
+     * Login
+     *
+     * @param credentials
+     * @param response
+     * @return user
+     */
     @PreAuthorize("permitAll()")
     @PostMapping("/login")
     fun login(@RequestBody credentials: Map<String, String>, response: HttpServletResponse): User {
@@ -37,6 +53,12 @@ class AuthenticationController(
         return user
     }
 
+    /**
+     * Register
+     *
+     * @param user
+     * @return registered user
+     */
     @PreAuthorize("permitAll()")
     @PostMapping("/register")
     fun register(@RequestBody user: User):User{
@@ -44,6 +66,14 @@ class AuthenticationController(
         return userService.createUser(user)
 
     }
+
+    /**
+     * Logout
+     *
+     * @param response
+     * @param request
+     * @return success message
+     */
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/logout")
     fun logout(response: HttpServletResponse, request: HttpServletRequest): String {
@@ -52,6 +82,11 @@ class AuthenticationController(
         return "{\"logout\": \"true\"}"
     }
 
+    /**
+     * Get authorities
+     *
+     * @return roles
+     */
     @PreAuthorize("permitAll()")
     @GetMapping("/authorities")
     fun getAuthorities(): String {

@@ -20,5 +20,12 @@ class Post(
     @JsonIdentityReference(alwaysAsId=true)
     var likesUserId: MutableSet<User>?,
     @ElementCollection
-    var hashtags: Set<String> = setOf()
+    var hashtags: Set<String> = setOf(),
+    @JsonAlias("userId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId",nullable = false)
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator::class, property = "id")
+    @JsonIdentityReference(alwaysAsId=true)
+    var user: User?
+
 ):BaseEntity()
