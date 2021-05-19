@@ -12,7 +12,7 @@
       <button mat-raised-button class="navbar-button" routerLink="/add-post" routerLinkActive="active">
         Add Post
       </button>
-      <button mat-raised-button class="navbar-button" routerLink="/profile" routerLinkActive="active">
+      <button mat-raised-button class="navbar-button" routerLink="/profile/{{currentUserName}}" routerLinkActive="active">
         Profile
       </button>
       <button mat-raised-button class="navbar-button" (click)="submitLogout()">

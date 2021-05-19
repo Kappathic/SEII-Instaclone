@@ -11,6 +11,7 @@ import {B64toImgService} from '../b64to-img.service';
 })
 export class HeaderComponent implements DoCheck{
   isLoggedIn = false;
+  currentUserName: any;
   searchToken: any;
   searchResults: any;
   filteredUsers = [{
@@ -21,6 +22,7 @@ export class HeaderComponent implements DoCheck{
     profilePic: '',
   }
   ];
+
   constructor(
     private snackBar: SnackBarService,
     private http: HttpClient,
@@ -87,6 +89,7 @@ export class HeaderComponent implements DoCheck{
     this.router.onSameUrlNavigation = 'reload';
     if (localStorage.getItem('currentUser')){
       this.isLoggedIn = true;
+      this.currentUserName = localStorage.getItem('currentUser');
     }
   }
 

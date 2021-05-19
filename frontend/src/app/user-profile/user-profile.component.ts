@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {SnackBarService} from '../snack-bar-service.service';
 import {SafeResourceUrl} from '@angular/platform-browser';
 import {B64toImgService} from '../b64to-img.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -21,12 +22,13 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private route: ActivatedRoute,
     private http: HttpClient,
     private snackBar: SnackBarService,
     private b64toImg: B64toImgService ) { }
-  getProfilePosts(): void{
+  getProfilePosts(const username: string): void{
     let requestUrl = 'api/user/profile';
-    requestUrl = requestUrl + '/' + localStorage.getItem('currentUser');
+    requestUrl = requestUrl + '/' + this.username;
     this.http.get(requestUrl, {}).subscribe(
       (data: any) => {
         this.username = data.username;
@@ -61,6 +63,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getProfilePosts();
+    this.route.params.subscribe(params => {
+      this.username = params['id'];
+    });
+    this.getProfilePosts(this.username);
   }
 }
