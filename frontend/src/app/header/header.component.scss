@@ -49,3 +49,37 @@
   max-height: 50px;
   text-align: center;
 }
+#searchBar{
+  width: 100%;
+  min-height: 100%;
+  display: block;
+}
+#searchBox{
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  align-items: center;
+}
+#searchBar-results-list{
+  position: absolute;
+  width: 300px;
+  background: #2a67ff;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+.searchBar-results-item{
+  display: flex;
+  height: 4em!important;
+  flex-direction: column;
+  align-items: center;
+}
+.searchBar-Pic{
+  width: 3em;
+  height: 3em;
+  border-radius: 25%;
+  box-shadow:
+    0 0 0 3px #2A67FF;
+}
+

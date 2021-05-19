@@ -23,6 +23,23 @@
       Login
     </button>
   </div>
+  <div class="searchBar">
+    <div id="searchBox">
+      <button mat-icon-button (click)="submitSearch()">
+      <mat-icon style="color: white">{{'search'}}</mat-icon>
+      </button>
+      <mat-form-field>
+        <mat-label>Search for Users</mat-label>
+        <input type="text" matInput placeholder="Search a user..." [(ngModel)]="searchToken" (keyup.enter)="submitSearch()">
+      </mat-form-field>
+    </div>
+    <mat-nav-list *ngIf="this.filteredUsers.length > 0" id="searchBar-results-list">
+      <a mat-list-item *ngFor="let user of filteredUsers" class="searchBar-results-item" href="/profile/{{user.username}}">
+        <img [src]="this.b64toImg.convert(user.profilePic)" alt="PP" class="searchBar-Pic">
+        <span class="searchBar-link" >{{user.username}}</span>
+      </a>
+    </mat-nav-list>
+  </div>
 </div>
 
 
