@@ -38,6 +38,8 @@ export class PostContainerComponent implements OnInit {
         (data: any) => {
           console.log('like successful');
           this.snackBar.open('Successfully liked!', 'close');
+          this.likeCount ++;
+          this.isLiked = true;
           this.newComment = null;
         },
         (error) => {
@@ -45,7 +47,8 @@ export class PostContainerComponent implements OnInit {
             case 200:
               console.log('liked successful');
               this.snackBar.open('Successfully liked!', 'close');
-              this.isLiked = false;
+              this.likeCount ++;
+              this.isLiked = true;
               break;
             default:
               console.log('Bad Request');
@@ -62,6 +65,8 @@ export class PostContainerComponent implements OnInit {
         (data: any) => {
           console.log('like revoked successful');
           this.snackBar.open('Successfully revoked liked!', 'close');
+          this.isLiked = false;
+          this.likeCount --;
           this.newComment = null;
         },
         (error) => {
@@ -70,6 +75,7 @@ export class PostContainerComponent implements OnInit {
               console.log('revoked liked successful');
               this.snackBar.open('Successfully revoked liked!', 'close');
               this.isLiked = false;
+              this.likeCount --;
               break;
             default:
               console.log('Bad Request');
