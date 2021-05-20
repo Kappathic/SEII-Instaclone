@@ -10,7 +10,7 @@
         <div></div>
         <button mat-raised-button *ngIf="!isFollowed && !ownProfile" (click)="followUser(this.userId)" style="width: 50%"> Follow </button>
         <button mat-raised-button *ngIf="isFollowed && !ownProfile" (click)="unfollowUser(this.userId)" style="background: #4A2FFF; width: 50%"> Unfollow </button>
-        <button mat-raised-button *ngIf="ownProfile"  style="background: #4A2FFF; width: 50%"> Profile Settings </button>
+        <button mat-raised-button *ngIf="ownProfile"  style="background: #4A2FFF; width: 50%" routerLink="/settings/{{this.username}}" routerLinkActive="active"> Profile Settings </button>
         <span class="userprofile-header-attr"> {{this.postCount}} posts</span>
         <span class="userprofile-header-attr"> {{this.followerCount}} follower</span>
       </div>

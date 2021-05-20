@@ -23,7 +23,7 @@ export class UserProfileComponent implements OnInit {
   followerCount: any;
 
   constructor(
-    private router: Router,
+    public router: Router,
     private route: ActivatedRoute,
     private http: HttpClient,
     private snackBar: SnackBarService,
@@ -107,7 +107,6 @@ export class UserProfileComponent implements OnInit {
       }
     );
   }
-
   convertPostItem(postData: any): SafeResourceUrl{
     return this.b64toImg.convert(postData);
   }

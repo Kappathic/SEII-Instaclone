@@ -21,8 +21,6 @@ export class ProfileSettingsComponent implements OnInit {
   croppedImage: any;
   bColor = '#56CCF2';
 
-
-
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -32,7 +30,7 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   patchProfile(): void { // TODO test if backend allows to patch the user otherwhise just change profilepic
-    if (!(localStorage.getItem('currentUser') !== this.username)){ this.router.navigate(['home']); return; }
+    if (localStorage.getItem('currentUser') !== this.username){ this.router.navigate(['home']); return; }
     if (!this.picture){ this.picture = this.pictureBackup; }
     if (!this.bio){ this.bio = this.bioBackup; }
     if (!this.email){ this.snackBar.open('Please enter email!', 'close'); return; }
@@ -63,7 +61,7 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   changeProfilePic(): void {
-    if (!(localStorage.getItem('currentUser') !== this.username)){ this.router.navigate(['home']); return; }
+    if (localStorage.getItem('currentUser') !== this.username){ this.router.navigate(['home']); return; }
     if (!this.picture){ this.snackBar.open('Please choose a picture to change!', 'Close'); return; }
     const requestUrl = 'api/user/updateProfilePic';
     this.http.post(requestUrl, {
@@ -107,7 +105,7 @@ export class ProfileSettingsComponent implements OnInit {
   }
 
   setValue(): void{
-    if (!(localStorage.getItem('currentUser') !== this.username)){ this.router.navigate(['home']); return; }
+    if (localStorage.getItem('currentUser') !== this.username){ this.router.navigate(['home']); return; }
     const requestUrl = 'api/user/profile/' + this.username;
     this.http.get(requestUrl, {}).subscribe(
         (data: any) => {

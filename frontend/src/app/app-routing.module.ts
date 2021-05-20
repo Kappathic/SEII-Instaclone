@@ -43,16 +43,17 @@ const routes: Routes = [
     canActivate: [AuthGuardService]
   },
   {
+    path: 'settings/:id',
+    component: ProfileSettingsComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
     path: '',
     redirectTo: '/home', pathMatch: 'full'
   },
   {
     path: '**',
     component: PageNotFoundComponent
-  },
-  {
-    path: 'settings/:id',
-    component: ProfileSettingsComponent
   }
 ];
 @NgModule({
