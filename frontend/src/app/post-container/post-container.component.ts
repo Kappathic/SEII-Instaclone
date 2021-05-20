@@ -14,15 +14,16 @@ export class PostContainerComponent implements OnInit {
   //
   newComment: any;
   postImage: any;
-  isActive = true;
+  profilePic: any;
   isLiked = false;
   showComments = false;
+  postDescription: any;
+  hashtags: any;
+  comments: any;
+  likeCount: any;
+  username: any;
   private postImageB64: any;
-  public postDescription: any;
-  public hashtags: any;
-  public comments: any;
-  public likeCount: any;
-  public username: any;
+  private userId: any;
   private postId: any;
   constructor(
     private snackBar: SnackBarService,
@@ -109,7 +110,6 @@ export class PostContainerComponent implements OnInit {
       );
   }
   addCommentsUserName(comments: any): any{
-    console.log(comments);
     if (comments.length === 0) { return comments; }
     for (let i  = 0; i < comments.length; i++ ) {
       const requestUrl = 'api/user/' + comments[i].userId;
@@ -125,6 +125,32 @@ export class PostContainerComponent implements OnInit {
     }
     return comments;
   }
+  getUserData(userId: any): void{
+    const requestUrl = 'api/user/' + userId;
+    this.http.get(requestUrl, {}).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.username = data.username;
+        this.profilePic = this.B64toImg.convert(data.profilePic);
+      },
+      (error) => {
+        switch (error.status) {
+          case 401:
+            console.log('Wrong credentials');
+            this.snackBar.open('Wrong credentials', 'close');
+            break;
+          case 404:
+            console.log('User not Found!');
+            this.snackBar.open('User not Found', 'close');
+            break;
+          default:
+            console.log('Bad Request');
+            this.snackBar.open('Bad Request', 'close');
+            break;
+        }
+      }
+    );
+  }
   ngOnInit(): void {
     this.postImageB64 = this.post.image;
     this.postDescription = this.post.description;
@@ -133,6 +159,7 @@ export class PostContainerComponent implements OnInit {
     this.likeCount = this.post.likesUserId.length;
     this.postId = this.post.id;
     this.postImage = this.B64toImg.convert(this.postImageB64);
+    this.getUserData(this.post.user);
     for (let tag = 0; tag < this.hashtags.length; tag++){
       if (this.hashtags[tag][0] !== '#'){
         this.hashtags[tag] = '   #' + this.hashtags[tag];
