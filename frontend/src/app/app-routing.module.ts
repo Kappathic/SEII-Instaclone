@@ -9,6 +9,7 @@ import {PrivacyNoticeComponent} from './privacy-notice/privacy-notice.component'
 import {AuthGuardService} from './auth-guard.service';
 import {AddPostComponent} from './add-post/add-post.component';
 import {UserProfileComponent} from './user-profile/user-profile.component';
+import {ProfileSettingsComponent} from './profile-settings/profile-settings.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
   {
     path: '**',
     component: PageNotFoundComponent
+  },
+  {
+    path: 'settings/:id',
+    component: ProfileSettingsComponent
   }
 ];
 @NgModule({

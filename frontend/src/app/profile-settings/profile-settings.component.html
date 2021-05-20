@@ -1,0 +1,37 @@
+<div class="page-container">
+  <div class="page-header">
+    <h1 class="big-heading">PROFILE-SETTINGS</h1>
+  </div>
+  <div class="settings-container">
+    <image-cropper
+      [imageChangedEvent]="imageChangedEvent"
+      [maintainAspectRatio]="true"
+      [aspectRatio]="1 / 1"
+      [resizeToHeight]="800"
+      [resizeToWidth]="800"
+      [cropperMinWidth]="200"
+      [cropperMinHeight]="200"
+      [backgroundColor]="bColor"
+      format="jpeg"
+      (imageCropped)="imageCropped($event)"
+      (loadImageFailed)="loadImageFailed()"
+      *ngIf="picture"
+    ></image-cropper>
+    <img *ngIf="picture" [src]="picture" id="cropped-image"/>
+    <input type="file" accept="image/*"  (change)="fileChangeEvent($event)" id="styledUpload" hidden/>
+    <button mat-raised-button style="margin-bottom: 20px; margin-top: 20px;"><label for="styledUpload" style="cursor:pointer; height: 100%; width: 100%;">Datei auswählen</label></button>
+    <mat-form-field appearance="fill" class="form-container">
+      <mat-label>Bio</mat-label>
+      <label>
+        <input matInput placeholder="Bio" [(ngModel)]="bio">
+      </label>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-container">
+      <mat-label>E-Mail</mat-label>
+      <label>
+        <input matInput type="text" placeholder="Deine Mailadresse" [(ngModel)]="email">
+      </label>
+    </mat-form-field>
+    <button mat-raised-button  (click)="changeProfilePic()">Change settings</button>
+  </div>
+</div>
