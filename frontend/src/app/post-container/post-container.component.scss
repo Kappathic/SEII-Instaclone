@@ -1,6 +1,7 @@
 $post-width: 800px;
 #post-container{
   margin-top: $post-width/10;
+  max-width: $post-width;
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
@@ -49,11 +50,11 @@ $post-width: 800px;
   border-radius: 25%;
 }
 #post-username{
+  text-align: left;
   color: #F2F2F2;
   font-size: 24px;
   font-weight: 400;
   margin: 0px;
-  align-self: center;
   text-decoration: none;
   cursor: pointer;
 }

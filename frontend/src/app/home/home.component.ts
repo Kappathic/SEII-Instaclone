@@ -10,18 +10,21 @@ import {SnackBarService} from '../snack-bar-service.service';
 })
 export class HomeComponent implements OnInit {
   mainFeedPosts: any;
+  rawPosts: any;
+
   constructor(
     private router: Router,
     private http: HttpClient,
-    private snackBar: SnackBarService) { }
-  loadPosts(): any{
+    private snackBar: SnackBarService) {
+  }
+
+  loadPosts(): void {
     const requestUrl = 'api/post/feed';
     this.http.get(requestUrl, {}).subscribe(
       (data: any) => {
-        console.log(data);
-        this.snackBar.open('Mainfeed loaded.', 'close');
-        this.mainFeedPosts = data;
-        return data;
+      console.log(data);
+      this.snackBar.open('Mainfeed loaded.', 'close');
+      this.mainFeedPosts = data;
       },
       (error) => {
         switch (error.status) {
@@ -41,7 +44,7 @@ export class HomeComponent implements OnInit {
       }
     );
   }
-  isLoggedIn(): boolean{
+  isLoggedIn(): boolean {
     return !(localStorage.getItem('currentUser') == null);
   }
   ngOnInit(): void {
