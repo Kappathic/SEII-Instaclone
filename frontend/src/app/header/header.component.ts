@@ -9,11 +9,11 @@ import {B64toImgService} from '../b64to-img.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements DoCheck{
+export class HeaderComponent implements DoCheck, OnInit{
   isLoggedIn = false;
   currentUserName: any;
   searchToken: any;
-  filteredUsers = [];
+  filteredUsers: any;
 
   constructor(
     private snackBar: SnackBarService,
@@ -81,4 +81,7 @@ export class HeaderComponent implements DoCheck{
     }
   }
 
+  ngOnInit(): void {
+    this.filterUsers([]);
+  }
 }

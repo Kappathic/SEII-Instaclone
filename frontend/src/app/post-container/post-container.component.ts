@@ -12,6 +12,7 @@ export class PostContainerComponent implements OnInit {
   // tslint:disable-next-line:no-input-rename
   @Input('post') post: any;
   //
+  public forbiddenComment = '#!?!#';
   newComment: any;
   postImage: any;
   profilePic: any;
@@ -19,7 +20,7 @@ export class PostContainerComponent implements OnInit {
   showComments = false;
   postDescription: any;
   hashtags: any;
-  comments: any;
+  comments!: Comment[];
   likeCount: any;
   username: any;
   private postImageB64: any;
@@ -116,20 +117,20 @@ export class PostContainerComponent implements OnInit {
       );
   }
   addCommentsUserName(comments: any): any{
-    if (comments.length === 0) { return comments; }
+    if (comments.length === 0) { this.comments = []; return; }
     for (let i  = 0; i < comments.length; i++ ) {
       const requestUrl = 'api/user/' + comments[i].userId;
-      console.log(requestUrl);
       this.http.get(requestUrl, {}).subscribe(
         (data: any) => {
-          comments[i].username = data.username;
+          this.comments[i].username = data.username;
+          this.comments[i].text = comments[i].text;
         },
         (error) => {
-          comments[i].username = 'notFound';
+          this.comments[i].username = 'notFound';
+          this.comments[i].text = comments[i].text;
         }
       );
     }
-    return comments;
   }
   getUserData(userId: any): void{
     const requestUrl = 'api/user/' + userId;
@@ -158,18 +159,23 @@ export class PostContainerComponent implements OnInit {
     );
   }
   ngOnInit(): void {
-    this.postImageB64 = this.post.image;
-    this.postDescription = this.post.description;
-    this.hashtags = this.post.hashtags;
-    this.comments = this.addCommentsUserName(this.post.comments);
-    this.likeCount = this.post.likesUserId.length;
-    this.postId = this.post.id;
-    this.postImage = this.B64toImg.convert(this.postImageB64);
-    this.getUserData(this.post.user);
-    for (let tag = 0; tag < this.hashtags.length; tag++){
-      if (this.hashtags[tag][0] !== '#'){
-        this.hashtags[tag] = '   #' + this.hashtags[tag];
+      this.comments = [{username: '', text: ''}];
+      this.postImageB64 = this.post.image;
+      this.postDescription = this.post.description;
+      this.hashtags = this.post.hashtags;
+      this.addCommentsUserName(this.post.comments);
+      this.likeCount = this.post.likesUserId.length;
+      this.postId = this.post.id;
+      this.postImage = this.B64toImg.convert(this.postImageB64);
+      this.getUserData(this.post.user);
+      for (let tag = 0; tag < this.hashtags.length; tag++) {
+        if (this.hashtags[tag][0] !== '#') {
+          this.hashtags[tag] = '   #' + this.hashtags[tag];
+        }
       }
     }
-  }
+}
+interface Comment {
+  username: string;
+  text: string;
 }

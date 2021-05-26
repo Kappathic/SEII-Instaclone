@@ -54,11 +54,6 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-  enableDemoMode(): void {
-      this.snackBar.open('Demo Mode enabled.', 'close');
-      localStorage.setItem('currentUser', 'admin');
-      localStorage.setItem('currentUserID', '0');
-  }
   ngOnInit(): void {
   }
 }

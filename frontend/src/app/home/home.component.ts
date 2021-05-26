@@ -10,7 +10,6 @@ import {SnackBarService} from '../snack-bar-service.service';
 })
 export class HomeComponent implements OnInit {
   mainFeedPosts: any;
-  rawPosts: any;
 
   constructor(
     private router: Router,
